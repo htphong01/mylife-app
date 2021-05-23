@@ -92,14 +92,14 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<PostPOJO>() {
             @Override
             public void onResponse(Call<PostPOJO> call, Response<PostPOJO> response) {
-                if(response.isSuccessful()) {
+                if(response.isSuccessful() && response.body().getSuccess()) {
                     List<Post> post = response.body().getPosts();
                     for(int i = 0; i < post.size(); i++) {
                         postArrayList.add(post.get(i));
                     }
-                    swipeRefreshLayout.setRefreshing(false);
-                    postsAdapter.notifyDataSetChanged();
                 }
+                swipeRefreshLayout.setRefreshing(false);
+                postsAdapter.notifyDataSetChanged();
             }
 
             @Override

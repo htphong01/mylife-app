@@ -27,9 +27,9 @@ public class Post {
     @SerializedName("user")
     private User user;
     @SerializedName("comments")
-    private List<Object> comments = null;
+    private List<Comment> comments = null;
     @SerializedName("likes")
-    private List<Object> likes = null;
+    private List<Like> likes = null;
 
     public Integer getId() {
         return id;
@@ -111,19 +111,19 @@ public class Post {
         this.user = user;
     }
 
-    public List<Object> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Object> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Object> getLikes() {
+    public List<Like> getLikes() {
         return likes;
     }
 
-    public void setLikes(List<Object> likes) {
+    public void setLikes(List<Like> likes) {
         this.likes = likes;
     }
 }

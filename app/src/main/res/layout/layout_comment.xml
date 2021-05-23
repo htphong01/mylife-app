@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_comment_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@color/colorLightGray"/>
+
+        <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_comment_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hồ Thanh Phong"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_marginTop="-4dp"
+                android:id="@+id/txt_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet commodo quam. Vivamus nisl turpis, pretium a erat ac, porta tincidunt tellus. Sed dui metus, tincidunt a magna id, fermentum euismod risus. Nunc sed nulla luctus, malesuada risus blandit, semper purus."
+                android:textColor="#000"/>
+
+            <LinearLayout
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_comment_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15 phút trước"/>
+
+                <TextView
+                    android:id="@+id/txt_comment_like_btn"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thích"/>
+
+                <TextView
+                    android:id="@+id/txt_comment_reply_btn"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trả lời"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/comment_report_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_more_vert_24"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

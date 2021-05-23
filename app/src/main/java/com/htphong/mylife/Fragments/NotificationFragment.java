@@ -48,7 +48,6 @@ public class NotificationFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        getNotification();
     }
 
     public void init() {
@@ -62,6 +61,7 @@ public class NotificationFragment extends Fragment {
         notifyAdapter = new NotificationAdapter(getContext(), list);
         notifyAdapter.setHasStableIds(true);
         notifyRecyclerview.setAdapter(notifyAdapter);
+        getNotification();
     }
 
     private void getNotification() {
@@ -72,7 +72,7 @@ public class NotificationFragment extends Fragment {
         call.enqueue(new Callback<NotificationPOJO>() {
             @Override
             public void onResponse(Call<NotificationPOJO> call, Response<NotificationPOJO> response) {
-                Log.d("NotificationResponse: ", response.body().toString());
+                Log.d("NotificationResponse: ", response.body().getSuccess().toString());
                 if(response.isSuccessful() && response.body().getSuccess()) {
                     List<Notifications> listNotifications = response.body().getNotifications();
                     for(int i = 0;i < listNotifications.size(); i++) {

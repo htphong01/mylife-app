@@ -22,6 +22,7 @@ import com.htphong.mylife.Fragments.AccountFragment;
 import com.htphong.mylife.HomeActivity;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.PostActivity;
 import com.htphong.mylife.ProfileActivity;
 import com.htphong.mylife.R;
 import com.squareup.picasso.Picasso;
@@ -61,10 +62,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
         Post post = (Post) list.get(position);
         Picasso.get().load(Constant.DOMAIN + post.getUser().getPhoto()).resize(350,350).centerCrop().into(holder.imgProfile);
         Picasso.get().load(Constant.DOMAIN + post.getPhoto()).resize(350,600).centerInside().into(holder.imgPost);
-        holder.imgPost.setOnClickListener(new View.OnClickListener() {
+        holder.imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToProfile(post);
+            }
+        });
+        holder.imgPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPost(post);
             }
         });
         holder.txtName.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +93,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
                 likePost(position);
             }
         });
+    }
+
+    private void goToPost(Post post) {
+        Intent intent = new Intent(context, PostActivity.class);
+        intent.putExtra("post_id", post.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+
     }
 
     private void likePost(Integer position) {
@@ -123,7 +138,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
             HomeActivity homeActivity = (HomeActivity)context;
             homeActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameHomeContainer, new AccountFragment()).commit();
         } else {
-            intent = new Intent(context, ProfileActivity.class);intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent = new Intent(context, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
 

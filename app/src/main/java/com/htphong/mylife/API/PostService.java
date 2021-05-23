@@ -10,6 +10,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PostService {
@@ -20,6 +21,9 @@ public interface PostService {
 
     @GET("api/posts")
     Call<PostPOJO> getPost(@Query("user") String user);
+
+    @GET("api/posts/{id}")
+    Call<PostPOJO> getSpecificPost(@Path("id") String id);
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
