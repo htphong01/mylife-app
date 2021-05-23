@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:background="@drawable/btn_round_gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/account_basic_btn"
+                    android:background="@android:color/transparent"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="Cơ bản"
+                    android:textColor="#A8575859"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:background="@drawable/btn_round_bold_red"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Chi tiết"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:textAllCaps="false"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ"
+                    android:textColor="#A8000000"
+                    android:textSize="18dp"/>
+
+                <EditText
+                    android:id="@+id/edt_account_details_address"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textSize="18dp"
+                    android:textColor="#A8000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_edt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trường học"
+                    android:textColor="#A8000000"
+                    android:textSize="18dp"/>
+
+                <EditText
+                    android:id="@+id/edt_account_details_education"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:maxLines="1"
+                    android:inputType="textEmailAddress"
+                    android:textSize="18dp"
+                    android:textColor="#A8000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_edt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nơi làm việc"
+                    android:textColor="#A8000000"
+                    android:textSize="18dp"/>
+
+                <EditText
+                    android:id="@+id/edt_account_details_work"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:maxLines="1"
+                    android:textSize="18dp"
+                    android:textColor="#A8000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_edt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
+                    android:textColor="#A8000000"
+                    android:textSize="18dp"/>
+
+                <EditText
+                    android:id="@+id/edt_account_details_phone"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:maxLines="1"
+                    android:textSize="18dp"
+                    android:textColor="#A8000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_edt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mối quan hệ"
+                    android:textColor="#A8000000"
+                    android:textSize="18dp"/>
+
+                <EditText
+                    android:id="@+id/edt_account_details_relationship"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:maxLines="1"
+                    android:textSize="18dp"
+                    android:textColor="#A8000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_edt"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/account_details_update_btn"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_red_border_10"
+                android:text="Cập nhật"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

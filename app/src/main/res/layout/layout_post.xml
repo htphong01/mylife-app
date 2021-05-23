@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imgPostProfile"
+                android:src="@color/colorLightGray"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="6dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/txtPostName"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:text="Hồ Thanh Phong"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:id="@+id/txtPostTime"
+                    android:textColor="@color/colorLightGray"
+                    android:text="2 ngày trước"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:id="@+id/btnPostOption"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_more_vert_24"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:id="@+id/txtPostDesc"
+            android:textColor="@color/colorGray"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="Loremp ipsum"/>
+
+        <ImageView
+            android:id="@+id/imgPostPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@color/colorLightGray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnPostLike"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/ic_baseline_favorite_outline"
+                android:background="@android:color/transparent"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnPostComment"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_comment"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="711 lượt thích"
+            android:id="@+id/txtPostLikes"
+            android:textStyle="bold"
+            android:layout_marginLeft="12dp"
+            android:textSize="13dp"
+            android:textColor="@color/colorGray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xem tất cả 10 bình luận"
+            android:id="@+id/txtPostComments"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorLightGray"/>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ccc"/>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

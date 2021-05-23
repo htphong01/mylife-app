@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:paddingRight="12dp"
+                android:background="@drawable/border_bottom"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_search_back"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_back"/>
+
+                <EditText
+                    android:id="@+id/edt_search"
+                    android:imeOptions="actionSearch"
+                    android:layout_marginRight="30dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="40dp"
+                    android:hint="Tìm kiếm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_round_edit"
+                    android:textColor="@color/colorGray"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+
+                <ImageButton
+                    android:id="@+id/btn_search_remove"
+                    android:padding="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_close"
+                    android:backgroundTint="@color/colorBlack"
+                    android:layout_marginLeft="-78dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_profile_cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/cover_default" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:background="@drawable/btn_round_white"
+                android:layout_gravity="center"
+                android:layout_marginTop="-80dp"
+                android:padding="6dp"
+                android:id="@+id/img_profile_avatar"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/nouser1"/>
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="-50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_marginRight="75dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_profile_friend_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1234"
+                        android:textStyle="bold"
+                        android:textColor="#373737"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bạn bè"
+                        android:textStyle="bold"
+                        android:textColor="#C0C0C0"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="75dp"
+                    android:layout_weight="1"
+                    android:layout_gravity=""
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_profile_post_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="520"
+                        android:textStyle="bold"
+                        android:textColor="#373737"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bài viết"
+                        android:textStyle="bold"
+                        android:textColor="#C0C0C0"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_profile_name"
+                android:layout_marginTop="20dp"
+                android:text="Thanh Phong"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#373737"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/txt_profile_created_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đã tham gia vào 10.05.2021"
+                android:textSize="16dp"
+                android:textColor="#C0C0C0"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_profile_add_friend"
+                        android:layout_marginRight="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:textAllCaps="false"
+                        android:text=" Thêm bạn bè"
+                        android:drawableLeft="@drawable/ic_add_friend"
+                        android:background="@drawable/btn_round_transparent"
+                        />
+
+                    <Button
+                        android:visibility="gone"
+                        android:id="@+id/btn_profile_friend"
+                        android:layout_marginRight="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:textAllCaps="false"
+                        android:text=" Bạn bè"
+                        android:textColor="#FFF"
+                        android:drawableLeft="@drawable/ic_check_24"
+                        android:background="@drawable/btn_round_red"
+                        />
+
+                    <Button
+                        android:id="@+id/btn_profile_chat"
+                        android:layout_marginRight="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:textAllCaps="false"
+                        android:text=" Nhắn tin"
+                        android:textSize="16dp"
+                        android:textColor="#FFF"
+                        android:drawableLeft="@drawable/ic_chat_profile"
+                        android:background="@drawable/btn_round_red"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btn_profile_setting"
+                        android:background="@drawable/btn_round_transparent"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:src="@drawable/ic_more"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_top_bottom"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/profile_fragment_post"
+                    android:layout_marginRight="7.5dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_posts"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bài viết"
+                        android:textColor="#434040"
+                        android:textStyle="bold"
+                        android:textSize="16dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/profile_fragment_album"
+                    android:layout_marginLeft="7.5dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_album_image"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Album"
+                        android:textColor="#434040"
+                        android:textStyle="bold"
+                        android:textSize="16dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/frameProfileContainer"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

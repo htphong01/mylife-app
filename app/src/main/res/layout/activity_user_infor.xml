@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    tools:context=".UserInforActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textFontWeight="700"
+        android:layout_marginBottom="30dp"
+        android:text="Thông tin cá nhân"
+        android:gravity="center_horizontal"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgUserInfo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@color/colorGray"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/txtSelectPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Photo"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtLayoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNameUserInfor"
+            android:hint="Họ và tên"
+            android:inputType="text"
+            android:textSize="15sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_DoB_User_Infor"
+            android:hint="Ngày sinh"
+            android:inputType="text"
+            android:textSize="15sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giới tính"
+            android:textColor="#A8000000"
+            android:textSize="18dp"/>
+
+        <RadioGroup
+            android:id="@+id/radio_gender_user_infor"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <RadioButton
+                android:id="@+id/gender_male"
+                android:layout_marginRight="7.5dp"
+                android:paddingLeft="4dp"
+                android:text="Nam"
+                android:textSize="18dp"
+                android:textColor="#A8000000"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+            <RadioButton
+                android:id="@+id/gender_female"
+                android:paddingLeft="4dp"
+                android:text="Nữ"
+                android:textSize="18dp"
+                android:textColor="#A8000000"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+            <RadioButton
+                android:id="@+id/gender_other"
+                android:layout_marginLeft="7.5dp"
+                android:paddingLeft="4dp"
+                android:text="Khác"
+                android:textSize="18dp"
+                android:textColor="#A8000000"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:text="Tiếp tục"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:textSize="17dp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="60dp"/>
+
+</LinearLayout>
