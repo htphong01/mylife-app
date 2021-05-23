@@ -51,7 +51,7 @@ public class AccountPostFragment extends Fragment {
     private void init() {
         sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         recyclerAccountPost = view.findViewById(R.id.recycler_account_posts);
-        recyclerAccountPost.setHasFixedSize(true);
+//        recyclerAccountPost.setHasFixedSize(true);
         recyclerAccountPost.setNestedScrollingEnabled(true);
         recyclerAccountPost.setLayoutManager(new LinearLayoutManager(getContext()));
         postAdapter = new PostsAdapter((HomeActivity)getContext(), postArrayList);

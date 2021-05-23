@@ -53,7 +53,7 @@ public class NotificationFragment extends Fragment {
 
     public void init() {
         notifyRecyclerview = view.findViewById(R.id.notify_recycler);
-        notifyRecyclerview.setHasFixedSize(true);
+//        notifyRecyclerview.setHasFixedSize(true);
         notifyRecyclerview.setNestedScrollingEnabled(true);
         notifyRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         notifyRecyclerview.setItemViewCacheSize(10);

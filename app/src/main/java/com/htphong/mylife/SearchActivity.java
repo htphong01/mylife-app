@@ -62,7 +62,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         recyclerSearch = findViewById(R.id.search_recycler);
         recyclerSearch.setNestedScrollingEnabled(true);
-        recyclerSearch.setHasFixedSize(true);
+//        recyclerSearch.setHasFixedSize(true);
         recyclerSearch.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         adapter = new SearchAdapter(getApplicationContext(), userList);
         recyclerSearch.setAdapter(adapter);
