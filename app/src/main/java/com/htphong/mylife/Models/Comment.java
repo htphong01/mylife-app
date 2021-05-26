@@ -15,6 +15,9 @@ public class Comment {
     @SerializedName("comment")
     private String comment;
 
+    @SerializedName("type")
+    private String type;
+
     @SerializedName("created_at")
     private String createdAt;
 
@@ -62,6 +65,14 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCreatedAt() {

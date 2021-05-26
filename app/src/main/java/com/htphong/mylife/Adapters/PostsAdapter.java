@@ -93,6 +93,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
                 likePost(position);
             }
         });
+        holder.btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPost(post);
+            }
+        });
     }
 
     private void goToPost(Post post) {
@@ -100,7 +106,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
         intent.putExtra("post_id", post.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-
     }
 
     private void likePost(Integer position) {

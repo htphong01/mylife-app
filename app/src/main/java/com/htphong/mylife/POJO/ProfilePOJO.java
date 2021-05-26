@@ -15,9 +15,9 @@ public class ProfilePOJO {
     @Expose
     private String token;
 
-    @SerializedName("isFriend")
+    @SerializedName("friendInvitationId")
     @Expose
-    private Boolean isFriend;
+    private Integer friendInvitationId;
 
     @SerializedName("postCount")
     @Expose
@@ -26,6 +26,14 @@ public class ProfilePOJO {
     @SerializedName("friendCount")
     @Expose
     private String friendCount;
+
+    @SerializedName("statusFriend")
+    @Expose
+    private Integer statusFriend;
+
+    @SerializedName("requestSendByYou")
+    @Expose
+    private Boolean requestSendByYou;
 
     @SerializedName("user")
     @Expose
@@ -39,12 +47,12 @@ public class ProfilePOJO {
         this.success = success;
     }
 
-    public Boolean getIsFriend() {
-        return isFriend;
+    public Integer getFriendInvitationId() {
+        return friendInvitationId;
     }
 
-    public void setIsFriend(Boolean isFriend) {
-        this.isFriend = isFriend;
+    public void setFriendInvitationId(Integer friendInvitationId) {
+        this.friendInvitationId = friendInvitationId;
     }
 
     public List<User> getUser() {
@@ -75,6 +83,22 @@ public class ProfilePOJO {
         return friendCount;
     }
 
+    public Integer getStatusFriend() {
+        return statusFriend;
+    }
+
+    public void setStatusFriend(Integer statusFriend) {
+        this.statusFriend = statusFriend;
+    }
+
+    public Boolean getRequestSendByYou() {
+        return requestSendByYou;
+    }
+
+    public void setRequestSendByYou(Boolean requestSendByYou) {
+        this.requestSendByYou = requestSendByYou;
+    }
+
     public void setFriendCount(String friendCount) {
         this.friendCount = friendCount;
     }
@@ -83,7 +107,6 @@ public class ProfilePOJO {
     public String toString() {
         return "ProfilePOJO{" +
                 "success=" + success +
-                ", isFriend=" + isFriend +
                 ", user=" + user +
                 '}';
     }

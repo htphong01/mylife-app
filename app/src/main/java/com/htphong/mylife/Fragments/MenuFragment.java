@@ -97,7 +97,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<StatusPOJO>() {
             @Override
             public void onResponse(Call<StatusPOJO> call, Response<StatusPOJO> response) {
-                Log.d("Logout Res: ", response.body().toString());
                 if(response.isSuccessful() && response.body().getSuccess()) {
                     SharedPreferences.Editor editor = userPref.edit();
                     editor.clear();

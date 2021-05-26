@@ -1,7 +1,10 @@
 package com.htphong.mylife.Utils;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +43,7 @@ public class Helper {
 
     public static String timeDifferent(String dataDate) {
 
-        String convTime = null;
+        String convTime = "";
 
         String prefix = "";
         String suffix = "trước";
@@ -99,5 +102,16 @@ public class Helper {
             e.printStackTrace();
         }
         return time;
+    }
+
+    public static String bitmapToString(Bitmap bitmap) {
+        if (bitmap!=null){
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            byte [] array = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(array,Base64.NO_WRAP);
+        }
+
+        return "";
     }
 }

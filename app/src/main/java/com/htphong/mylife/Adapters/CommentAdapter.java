@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment comment = (Comment)list.get(position);
         Picasso.get().load(Constant.DOMAIN + comment.getUser().getPhoto()).resize(350,350).centerCrop().into(holder.commentAuthorAvatar);
         holder.txtAuthorName.setText(comment.getUser().getUserName());
-        holder.txtComment.setText(comment.getComment());
+        if(comment.getType().equals("text")) {
+            holder.txtComment.setText(comment.getComment());
+            holder.imgCommentContent.setVisibility(View.GONE);
+        } else {
+            holder.txtComment.setVisibility(View.GONE);
+            Picasso.get().load(Constant.DOMAIN + comment.getComment()).resize(350,350).centerCrop().into(holder.imgCommentContent);
+        }
         holder.txtCommentTime.setText(Helper.timeDifferent(comment.getCreatedAt()));
     }
 
@@ -57,6 +64,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         private CircleImageView commentAuthorAvatar;
         private TextView txtAuthorName, txtComment, txtCommentTime, txtCommentReply, txtCommentLike;
         private ImageButton btnReport;
+        private ImageView imgCommentContent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +75,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             txtCommentReply = itemView.findViewById(R.id.txt_comment_reply_btn);
             txtCommentLike = itemView.findViewById(R.id.txt_comment_like_btn);
             btnReport = itemView.findViewById(R.id.comment_report_btn);
+            imgCommentContent = itemView.findViewById(R.id.img_comment_content);
         }
     }
 }

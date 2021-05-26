@@ -123,7 +123,6 @@ public class SignInFragment extends Fragment {
         call.enqueue(new Callback<ProfilePOJO>() {
             @Override
             public void onResponse(Call<ProfilePOJO> call, Response<ProfilePOJO> response) {
-                Log.d("SignIn Response: ", response.body().toString());
                 if (response.isSuccessful() && response.body().getSuccess()) {
                     User user = response.body().getUser().get(0);
                     SharedPreferences.Editor editor = userPref.edit();

@@ -102,7 +102,7 @@
                         android:id="@+id/txt_profile_friend_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1234"
+                        android:text="0"
                         android:textStyle="bold"
                         android:textColor="#373737"/>
 
@@ -128,7 +128,7 @@
                         android:id="@+id/txt_profile_post_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="520"
+                        android:text="0"
                         android:textStyle="bold"
                         android:textColor="#373737"/>
 
@@ -207,6 +207,42 @@
                         android:layout_height="38dp"
                         android:textAllCaps="false"
                         android:text=" Bạn bè"
+                        android:textColor="#FFF"
+                        android:drawableLeft="@drawable/ic_check_24"
+                        android:background="@drawable/btn_round_red"
+                        />
+
+                    <Button
+                        android:visibility="gone"
+                        android:id="@+id/btn_profile_remove_friend"
+                        android:layout_marginRight="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:textAllCaps="false"
+                        android:text="Hủy yêu cầu"
+                        android:textColor="#FFF"
+                        android:drawableLeft="@drawable/ic_close_white"
+                        android:background="@drawable/btn_round_red"
+                        />
+
+                    <Button
+                        android:visibility="gone"
+                        android:id="@+id/btn_profile_accept_friend"
+                        android:layout_marginRight="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:textAllCaps="false"
+                        android:text="Chấp nhận"
                         android:textColor="#FFF"
                         android:drawableLeft="@drawable/ic_check_24"
                         android:background="@drawable/btn_round_red"

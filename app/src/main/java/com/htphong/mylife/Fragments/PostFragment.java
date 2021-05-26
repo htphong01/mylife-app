@@ -26,6 +26,8 @@ import com.htphong.mylife.Models.Comment;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.CommentPOJO;
 import com.htphong.mylife.POJO.PostPOJO;
+import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.PostActivity;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
@@ -39,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PostFragment extends Fragment {
+public class PostFragment extends Fragment implements View.OnClickListener {
     private View view;
     private Context mContext;
     private ImageButton postLikeIcon;
@@ -52,6 +54,7 @@ public class PostFragment extends Fragment {
     private ArrayList<Comment> commentArrayList = new ArrayList<>();
     private Retrofit retrofit;
     private static int post_id = 1;
+    private Post post = new Post();
 
     @Nullable
     @Override
@@ -74,6 +77,7 @@ public class PostFragment extends Fragment {
         imgPostAuthorAvatar = view.findViewById(R.id.post_img_avatar);
         btnLikePost = view.findViewById(R.id.post_like_btn);
         btnCommentPost = view.findViewById(R.id.post_comment_btn);
+
         commentRecyclerView = view.findViewById(R.id.post_recycler_comment);
         commentRecyclerView.setNestedScrollingEnabled(true);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -83,6 +87,10 @@ public class PostFragment extends Fragment {
         commentRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         commentAdapter = new CommentAdapter(commentArrayList, getContext());
         commentRecyclerView.setAdapter(commentAdapter);
+
+        btnLikePost.setOnClickListener(this);
+        btnCommentPost.setOnClickListener(this);
+
         getPost();
         getComments();
     }
@@ -94,7 +102,7 @@ public class PostFragment extends Fragment {
             @Override
             public void onResponse(Call<PostPOJO> call, Response<PostPOJO> response) {
                 if(response.isSuccessful() && response.body().getSuccess()) {
-                    Post post = response.body().getPosts().get(0);
+                    post = response.body().getPosts().get(0);
                     txtPostAuthorName.setText(post.getUser().getUserName());
                     txtPostTime.setText(Helper.timeDifferent(post.getCreatedAt()));
                     txtPostDescription.setText(post.getDescription());
@@ -112,7 +120,8 @@ public class PostFragment extends Fragment {
         });
     }
 
-    private void getComments() {
+    public void getComments() {
+        commentArrayList.clear();
         CommentService commentService = retrofit.create(CommentService.class);
         Call<CommentPOJO> commentPOJOCall = commentService.getCommentPost(String.valueOf(post_id));
         commentPOJOCall.enqueue(new Callback<CommentPOJO>() {
@@ -132,4 +141,40 @@ public class PostFragment extends Fragment {
         });
     }
 
+    private void likePost() {
+        postLikeIcon.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_outline : R.drawable.ic_baseline_favorite_red );
+        Retrofit retrofit = new Client().getRetrofit(getContext());
+        PostService postService = retrofit.create(PostService.class);
+        Call<StatusPOJO> call = postService.likePost(String.valueOf(post.getId()));
+        call.enqueue(new Callback<StatusPOJO>() {
+            @Override
+            public void onResponse(Call<StatusPOJO> call, Response<StatusPOJO> response) {
+                if(response.isSuccessful() && response.body().getSuccess()) {
+                    post.setSelfLike(!post.getSelfLike());
+                    post.setLikesCount(post.getSelfLike() ? (post.getLikesCount() + 1) : (post.getLikesCount() - 1));
+                    txtPostCountLike.setText(post.getLikesCount() + " người đã thích bài viết này");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StatusPOJO> call, Throwable t) {
+                Log.d("PostLike: ", t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.post_like_btn: {
+                likePost();
+                break;
+            }
+
+            case R.id.post_comment_btn: {
+
+                break;
+            }
+        }
+    }
 }

@@ -1,32 +1,41 @@
 package com.htphong.mylife.Models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Friend {
 
     @SerializedName("id")
+    @Expose
     private Integer id;
 
     @SerializedName("user_id1")
+    @Expose
     private Integer userId1;
 
     @SerializedName("user_id2")
+    @Expose
     private Integer userId2;
 
     @SerializedName("isAccept")
+    @Expose
     private Integer isAccept;
 
     @SerializedName("created_at")
+    @Expose
     private String createdAt;
 
     @SerializedName("updated_at")
+    @Expose
     private String updatedAt;
 
-    @SerializedName("user1_name")
-    private String user1Name;
+    @SerializedName("user1")
+    @Expose
+    private User user1;
 
-    @SerializedName("user2_name")
-    private String user2Name;
+    @SerializedName("user2")
+    @Expose
+    private User user2;
 
     public Integer getId() {
         return id;
@@ -76,19 +85,20 @@ public class Friend {
         this.updatedAt = updatedAt;
     }
 
-    public String getUser1Name() {
-        return user1Name;
+    public User getUser1() {
+        return user1;
     }
 
-    public void setUser1Name(String user1Name) {
-        this.user1Name = user1Name;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
 
-    public String getUser2Name() {
-        return user2Name;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setUser2Name(String user2Name) {
-        this.user2Name = user2Name;
+    public void setUser2(User user2) {
+        this.user2 = user2;
     }
+
 }

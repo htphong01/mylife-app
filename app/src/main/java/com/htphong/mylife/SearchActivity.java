@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -47,14 +49,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         btnBack = findViewById(R.id.btn_search_back);
         btnRemove = findViewById(R.id.btn_search_remove);
         edtSearch = findViewById(R.id.edt_search);
-        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!edtSearch.getText().toString().isEmpty()) {
                     search();
-                    return true;
                 }
-                return false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         btnBack.setOnClickListener(this);
@@ -62,7 +72,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         recyclerSearch = findViewById(R.id.search_recycler);
         recyclerSearch.setNestedScrollingEnabled(true);
-//        recyclerSearch.setHasFixedSize(true);
+        recyclerSearch.setHasFixedSize(true);
         recyclerSearch.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         adapter = new SearchAdapter(getApplicationContext(), userList);
         recyclerSearch.setAdapter(adapter);
@@ -94,17 +104,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         call.enqueue(new Callback<SearchPOJO>() {
             @Override
             public void onResponse(Call<SearchPOJO> call, Response<SearchPOJO> response) {
-                if(response.isSuccessful()) {
+                if(response.isSuccessful() && response.body().getSuccess()) {
                     List<User> list = response.body().getUsers();
-                    for(int i = 0; i < list.size(); i++) {
-                        User user = new User();
-                        user.setId(list.get(i).getId());
-                        user.setUserName(list.get(i).getUserName());
-                        user.setPhoto(list.get(i).getPhoto());
-                        userList.add(user);
-                    }
-
+                    userList.addAll(list);
                     adapter.notifyDataSetChanged();
+                    Log.d("SearchSuccess: ", "success");
                 }
             }
 

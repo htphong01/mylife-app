@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#FFF">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_list_chat_room">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,14 +16,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:backgroundTint="@color/colorWhite"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:background="@color/colorWhite"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lời mời kết bạn"
+                android:text="Tin nhắn"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:textColor="@color/colorBlack"
@@ -31,13 +30,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:background="@color/colorWhite"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recycler_add_friend"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_chat_room"/>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

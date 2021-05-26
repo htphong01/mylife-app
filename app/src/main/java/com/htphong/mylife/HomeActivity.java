@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.htphong.mylife.Fragments.AccountFragment;
 import com.htphong.mylife.Fragments.AddFriendInvitationFragment;
 import com.htphong.mylife.Fragments.HomeFragment;
+import com.htphong.mylife.Fragments.ListChatRoomFragment;
 import com.htphong.mylife.Fragments.MenuFragment;
 import com.htphong.mylife.Fragments.NotificationFragment;
 
@@ -87,20 +88,27 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    private void unCheckMenuItem() {
+        bottomNav.getMenu().getItem(2).setChecked(true);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_search: {
+                unCheckMenuItem();
                 startActivity(new Intent(HomeActivity.this, SearchActivity.class));
                 break;
             }
 
             case R.id.btn_message: {
-
+                unCheckMenuItem();
+                fragmentManager.beginTransaction().replace(R.id.frameHomeContainer, new ListChatRoomFragment()).commit();
                 break;
             }
 
             case R.id.btn_menu: {
+                unCheckMenuItem();
                 fragmentManager.beginTransaction().replace(R.id.frameHomeContainer, new MenuFragment()).commit();
             }
         }

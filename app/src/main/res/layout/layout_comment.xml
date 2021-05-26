@@ -37,12 +37,16 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:layout_marginTop="-4dp"
                 android:id="@+id/txt_comment_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet commodo quam. Vivamus nisl turpis, pretium a erat ac, porta tincidunt tellus. Sed dui metus, tincidunt a magna id, fermentum euismod risus. Nunc sed nulla luctus, malesuada risus blandit, semper purus."
                 android:textColor="#000"/>
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+id/img_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_marginTop="0dp"
