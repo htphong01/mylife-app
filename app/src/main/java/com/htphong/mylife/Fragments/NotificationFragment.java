@@ -2,7 +2,6 @@ package com.htphong.mylife.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.NotificationService;
 import com.htphong.mylife.Adapters.NotificationAdapter;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.Models.Notifications;
 import com.htphong.mylife.POJO.NotificationPOJO;
 import com.htphong.mylife.R;

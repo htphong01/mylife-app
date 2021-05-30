@@ -16,13 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.FriendService;
-import com.htphong.mylife.Constant;
-import com.htphong.mylife.Fragments.AccountFragment;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Friend;
 import com.htphong.mylife.POJO.FriendPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
-import com.htphong.mylife.ProfileActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;

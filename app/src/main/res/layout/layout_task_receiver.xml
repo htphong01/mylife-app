@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="999dp"
+    app:cardElevation="0dp"
+    android:layout_marginRight="8dp">
+
+    <LinearLayout
+        android:background="#F5F5F5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_layout_task_receiver_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/avatar_example"
+            android:background="@drawable/circle_border_black"/>
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/txt_layout_task_receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Một bé cute"
+            android:textSize="12sp"
+            android:textColor="@color/colorBlack"/>
+
+        <ImageButton
+            android:id="@+id/layout_task_receiver_remove_btn"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_task_close"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

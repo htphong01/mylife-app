@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".AddPostActivity">
+    tools:context=".Activities.AddPostActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"

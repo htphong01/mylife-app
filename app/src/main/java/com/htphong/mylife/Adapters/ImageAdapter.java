@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.R;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +32,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String link = images.get(position);
-        Picasso.get().load(Constant.DOMAIN + link).resize(350, 600).centerCrop().into(holder.albumImage);
+        Picasso.get().load(Constant.DOMAIN + link).resize(400, 350).centerCrop().into(holder.albumImage);
     }
 
     @Override

@@ -19,11 +19,11 @@ import androidx.fragment.app.Fragment;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
-import com.htphong.mylife.AuthActivity;
+import com.htphong.mylife.Activities.AuthActivity;
 import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.ProfilePOJO;
 import com.htphong.mylife.R;
-import com.htphong.mylife.UserInforActivity;
+import com.htphong.mylife.Activities.UserInforActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.htphong.mylife.API.ChattingService;
@@ -26,11 +25,11 @@ import com.htphong.mylife.Adapters.MessageAdapter;
 import com.htphong.mylife.Models.Message;
 import com.htphong.mylife.POJO.MessagePOJO;
 import com.htphong.mylife.POJO.RoomPOJO;
+import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,11 +38,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.WebSocket;
-import okhttp3.WebSocketListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -82,46 +76,12 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_chatting);
         userSharedPreferences = getApplicationContext().getSharedPreferences("user", getApplicationContext().MODE_PRIVATE);
         chatRoomSharedPreferences = getApplicationContext().getSharedPreferences("chat_room", getApplicationContext().MODE_PRIVATE);
-        mSocket.on("receiveMessage", onNewMessage);
         mSocket.connect();
-        JsonObject newConnector = new JsonObject();
-        newConnector.addProperty("id", userSharedPreferences.getString("id", "1"));
-        newConnector.addProperty("room_id", chatRoomSharedPreferences.getString("room_id", "12"));
-        mSocket.emit("newConnector", newConnector);
+
+        socketOnEvents();
+        mSocket.emit("newConnector", chatRoomSharedPreferences.getString("room_id", "12"));
         init();
     }
-
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    Message message = new Message();
-                    try {
-                        message.setId(Integer.parseInt(data.getString("id")));
-                        message.setRoomId(Integer.parseInt(data.getString("room_id")));
-                        message.setUserId(Integer.parseInt(data.getString("user_id")));
-                        message.setMessage(data.getString("message"));
-                        message.setType(data.getString("type"));
-                        message.setStatus(Integer.parseInt(data.getString("status")));
-                        message.setCreatedAt(data.getString("created_at"));
-                        message.setUpdatedAt(data.getString("updated_at"));
-                        message.setNickname(data.getString("nickname"));
-                        message.setAvatar(data.getString("avatar"));
-                        if(String.valueOf(message.getRoomId()).equals(chatRoomSharedPreferences.getString("room_id", "0"))) {
-                            messageArrayList.add(message);
-                            messageAdapter.notifyItemInserted(messageArrayList.size() - 1);
-                            recyclerChatting.smoothScrollToPosition(messageArrayList.size() - 1);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    };
 
     private void init() {
         retrofit = new Client().getRetrofit(getApplicationContext());
@@ -186,6 +146,11 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         getMessage();
     }
 
+    private void socketOnEvents() {
+        mSocket.on("receiveMessage", onNewMessage);
+        mSocket.on("receiveVideoCall", onNewVideoCall);
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -200,6 +165,7 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.chat_ic_back: {
                 super.onBackPressed();
+                mSocket.emit("stopConnect", chatRoomSharedPreferences.getString("room_id", "12"));
                 break;
             }
 
@@ -212,7 +178,47 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
                 sendPhotoMessage();
                 break;
             }
+
+            case R.id.chat_ic_call: {
+                sendPhoneCall();
+                break;
+            }
+
+            case R.id.chat_ic_video_call: {
+                sendVideoCall();
+                break;
+            }
+
+            case R.id.chat_ic_bar: {
+                actionIconBarClick();
+                break;
+            }
+
+            case R.id.chat_ic_more: {
+                actionIconMoreClick();
+                break;
+            }
+
+            case R.id.chat_ic_emotion: {
+
+                break;
+            }
         }
+    }
+
+    private void actionIconMoreClick() {
+    }
+
+    private void actionIconBarClick() {
+        startActivity(new Intent(ChattingActivity.this, ChattingSettingActivity.class));
+    }
+
+    private void sendVideoCall() {
+        mSocket.emit("sendVideoCall", chatRoomSharedPreferences.getString("room_id", "12"));
+        startActivity(new Intent(ChattingActivity.this, SendingVideoCallActivity.class));
+    }
+
+    private void sendPhoneCall() {
     }
 
     private void getRoomInformation() {
@@ -223,6 +229,10 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
                 if(response.isSuccessful() && response.body().getSuccess()) {
                     Picasso.get().load(Constant.DOMAIN + response.body().getRooms().get(0).getPhoto()).resize(350,350).centerCrop().into(chatRoomAvatar);
                     chatRoomName.setText(response.body().getRooms().get(0).getName());
+                    SharedPreferences.Editor editor = chatRoomSharedPreferences.edit();
+                    editor.putString("room_name", String.valueOf(response.body().getRooms().get(0).getName()));
+                    editor.putString("room_photo", String.valueOf(response.body().getRooms().get(0).getPhoto()));
+                    editor.apply();
                 }
             }
 
@@ -271,7 +281,10 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
                     jsonObject.addProperty("updated_at", message1.getUpdatedAt());
                     jsonObject.addProperty("nickname", message1.getNickname());
                     jsonObject.addProperty("avatar", message1.getAvatar());
-
+                    int size = messageArrayList.size();
+                    messageArrayList.add(size,message1);
+                    messageAdapter.notifyItemInserted(size);
+                    recyclerChatting.smoothScrollToPosition(messageArrayList.size() - 1);
                     mSocket.emit("newMessage", jsonObject);
                 }
             }
@@ -302,6 +315,60 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
                 Log.d("ChattingErr:", t.getMessage());
             }
         });
+    }
+
+    private Emitter.Listener onNewVideoCall = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(ChattingActivity.this, InComingVideoCallActivity.class));
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Message message = new Message();
+                    try {
+                        message.setId(Integer.parseInt(data.getString("id")));
+                        message.setRoomId(Integer.parseInt(data.getString("room_id")));
+                        message.setUserId(Integer.parseInt(data.getString("user_id")));
+                        message.setMessage(data.getString("message"));
+                        message.setType(data.getString("type"));
+                        message.setStatus(Integer.parseInt(data.getString("status")));
+                        message.setCreatedAt(data.getString("created_at"));
+                        message.setUpdatedAt(data.getString("updated_at"));
+                        message.setNickname(data.getString("nickname"));
+                        message.setAvatar(data.getString("avatar"));
+                        Log.d("onReceiveMess: ", message.toString());
+                        if(String.valueOf(message.getRoomId()).equals(chatRoomSharedPreferences.getString("room_id", "12"))) {
+                            if(!String.valueOf(message.getUserId()).equals(userSharedPreferences.getString("id", "1"))) {
+                                int size = messageArrayList.size();
+                                messageArrayList.add(size,message);
+                                messageAdapter.notifyItemInserted(size);
+                                recyclerChatting.smoothScrollToPosition(messageArrayList.size() - 1);
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSocket.connect();
     }
 
     @Override

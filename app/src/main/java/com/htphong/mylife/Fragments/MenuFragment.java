@@ -18,9 +18,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
-import com.htphong.mylife.AuthActivity;
-import com.htphong.mylife.Constant;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Activities.AuthActivity;
+import com.htphong.mylife.Utils.Constant;
+import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.POJO.StatusPOJO;
 import com.htphong.mylife.R;
 import com.squareup.picasso.Picasso;

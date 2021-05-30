@@ -52,7 +52,7 @@ public class ProfileAlbumFragment extends Fragment {
         recyclerAccountPost = view.findViewById(R.id.recycler_account_posts);
 //        recyclerAccountPost.setHasFixedSize(true);
         recyclerAccountPost.setNestedScrollingEnabled(true);
-        recyclerAccountPost.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerAccountPost.setLayoutManager(new GridLayoutManager(getContext(), 3));
         postAdapter = new ImageAdapter(imageLinks);
         recyclerAccountPost.setAdapter(postAdapter);
         getImages();

@@ -2,8 +2,10 @@ package com.htphong.mylife.API;
 
 import com.htphong.mylife.POJO.CommentPOJO;
 import com.htphong.mylife.POJO.MessagePOJO;
+import com.htphong.mylife.POJO.ProfilePOJO;
 import com.htphong.mylife.POJO.RoomPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.POJO.UserPOJO;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -12,6 +14,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -30,4 +33,12 @@ public interface ChattingService {
     @FormUrlEncoded
     @POST("api/messages")
     Call<MessagePOJO> sendMessage(@Field("room_id") String room_id, @Field("message") String message, @Field("type") String type);
+
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @PUT("api/rooms/update/nickname")
+    Call<StatusPOJO> changeNickname(@Field("user_id") String user_id, @Field("room_id") String room_id, @Field("nickname") String nickname);
+
+    @GET("api/rooms/users")
+    Call<UserPOJO> getRoomUsers(@Query("room_id") String room_id);
 }

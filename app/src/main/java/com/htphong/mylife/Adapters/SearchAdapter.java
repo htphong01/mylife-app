@@ -12,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.User;
-import com.htphong.mylife.ProfileActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
 import com.htphong.mylife.R;
 import com.squareup.picasso.Picasso;
 

@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.htphong.mylife.Constant;
-import com.htphong.mylife.MainActivity;
+import com.htphong.mylife.Utils.Constant;
+import com.htphong.mylife.Activities.MainActivity;
 
 import java.io.IOException;
 

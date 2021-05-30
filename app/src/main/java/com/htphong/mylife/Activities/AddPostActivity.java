@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.PostService;
+import com.htphong.mylife.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

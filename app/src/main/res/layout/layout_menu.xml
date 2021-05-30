@@ -14,20 +14,36 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Menu"
-                android:textColor="#393636"
-                android:textSize="32dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_menu"/>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Menu"
+                    android:textColor="#393636"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/border_bottom"
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
@@ -57,7 +73,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="25dp"
-                        android:src="@drawable/cover_default" />
+                        android:src="@drawable/avatar_example" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -87,7 +103,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/ic_down_btn" />
+                        android:src="@drawable/ic_profile_arrow" />
 
                 </LinearLayout>
 
@@ -123,7 +139,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -157,7 +173,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -191,7 +207,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -225,7 +241,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -259,7 +275,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -293,7 +309,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 
@@ -327,7 +343,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_down_btn" />
+                    android:src="@drawable/ic_arrow" />
 
             </LinearLayout>
 

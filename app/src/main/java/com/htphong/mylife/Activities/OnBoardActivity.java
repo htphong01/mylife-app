@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.htphong.mylife.Adapters.ViewPagerAdapter;
+import com.htphong.mylife.R;
 
 public class OnBoardActivity extends AppCompatActivity {
 

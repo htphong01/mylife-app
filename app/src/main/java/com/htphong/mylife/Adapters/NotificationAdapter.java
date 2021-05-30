@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Notifications;
 import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Helper;
 import com.htphong.mylife.Utils.NotificationDiffUtilCallBacks;
 import com.squareup.picasso.Picasso;
 
@@ -51,7 +52,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Notifications notification = list.get(position);
         Picasso.get().load(Constant.DOMAIN + notification.getImage()).resize(350,350).centerCrop().into(holder.userImage);
         holder.txtContent.setText(Html.fromHtml(notification.getContent()));
-        holder.txtTime.setText(Constant.timeDifferent(notification.getCreatedAt()));
+        holder.txtTime.setText(Helper.timeDifferent(notification.getCreatedAt()));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             for(String key : bundle.keySet()) {
                 Picasso.get().load(Constant.DOMAIN + bundle.getString("image")).resize(3350,350).centerCrop().into(holder.userImage);
                 holder.txtContent.setText(Html.fromHtml(bundle.getString("content")));
-                holder.txtTime.setText(Constant.timeDifferent(bundle.getString("created_at")));
+                holder.txtTime.setText(Helper.timeDifferent(bundle.getString("created_at")));
             }
         }
     }

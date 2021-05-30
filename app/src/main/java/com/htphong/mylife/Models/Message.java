@@ -139,4 +139,6 @@ public class Message {
                 ", avatar='" + avatar + '\'' +
                 '}';
     }
+
+    
 }

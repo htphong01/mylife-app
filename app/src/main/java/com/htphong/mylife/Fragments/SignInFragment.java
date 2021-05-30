@@ -20,13 +20,16 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.htphong.mylife.AuthActivity;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Activities.AuthActivity;
+import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.R;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.ProfilePOJO;
+
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -175,4 +178,5 @@ public class SignInFragment extends Fragment {
 
         return true;
     }
+
 }

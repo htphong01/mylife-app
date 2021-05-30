@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Message;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
@@ -62,7 +62,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             if(position < messageArrayList.size() - 1 ) {
                 Message nextMessage = (Message)messageArrayList.get(position + 1);
                 if(nextMessage.getUserId() != message.getUserId()) {
-                    Log.d("MessageCheck: ", "true " + position);
                     holder.layoutMyMessage.setPadding(0,0,0,50);
                 }
             }
@@ -83,7 +82,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             if(position < messageArrayList.size() - 1 ) {
                 Message nextMessage = (Message)messageArrayList.get(position + 1);
                 if(nextMessage.getUserId() != message.getUserId()) {
-                    Log.d("MessageCheck: ", "true " + position);
                     Picasso.get().load(Constant.DOMAIN + message.getAvatar()).resize(350, 350).centerCrop().into(holder.imgMessageAvatar);
                     holder.layoutOtherMessage.setPadding(0,0,0,50);
                 } else {

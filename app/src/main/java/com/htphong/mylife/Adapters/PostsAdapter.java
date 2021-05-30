@@ -12,27 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.PostService;
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Fragments.AccountFragment;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.StatusPOJO;
-import com.htphong.mylife.PostActivity;
-import com.htphong.mylife.ProfileActivity;
+import com.htphong.mylife.Activities.PostActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
 import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -84,7 +79,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
         holder.txtDesc.setText(post.getDescription());
         holder.txtComments.setText("Xem tât cả " + post.getCommentsCount() + " bình luận");
         holder.txtLikes.setText(post.getLikesCount() + " lượt thích");
-        holder.txtTime.setText(Constant.timeDifferent(post.getCreatedAt()));
+        holder.txtTime.setText(Helper.timeDifferent(post.getCreatedAt()));
         holder.btnLike.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_red : R.drawable.ic_baseline_favorite_outline);
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,18 +9,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Adapters.SearchAdapter;
 import com.htphong.mylife.Models.User;
-import com.htphong.mylife.POJO.SearchPOJO;
+import com.htphong.mylife.POJO.UserPOJO;
+import com.htphong.mylife.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,10 +98,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         UserService userService = retrofit.create(UserService.class);
 
-        Call<SearchPOJO> call = userService.getUser(edtSearch.getText().toString());
-        call.enqueue(new Callback<SearchPOJO>() {
+        Call<UserPOJO> call = userService.getUser(edtSearch.getText().toString());
+        call.enqueue(new Callback<UserPOJO>() {
             @Override
-            public void onResponse(Call<SearchPOJO> call, Response<SearchPOJO> response) {
+            public void onResponse(Call<UserPOJO> call, Response<UserPOJO> response) {
                 if(response.isSuccessful() && response.body().getSuccess()) {
                     List<User> list = response.body().getUsers();
                     userList.addAll(list);
@@ -113,7 +111,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<SearchPOJO> call, Throwable t) {
+            public void onFailure(Call<UserPOJO> call, Throwable t) {
                 Log.d("Search onFailure: ", t.getMessage());
             }
         });

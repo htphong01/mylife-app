@@ -5,6 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:allowBackup="true"
@@ -14,24 +22,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChattingActivity"></activity>
-        <activity android:name=".PostActivity" />
-        <activity android:name=".WelcomeActivity" />
-        <activity android:name=".UserInforActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".OnBoardActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".AuthActivity" />
-        <activity android:name=".AddPostActivity" />
-        <activity android:name=".AccountInformationActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.GivingTaskActivity"></activity>
+        <activity android:name=".Activities.ChattingSettingActivity" />
+        <activity
+            android:name=".Activities.InComingVideoCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SendingVideoCallActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.ChattingActivity" />
+        <activity android:name=".Activities.PostActivity" />
+        <activity android:name=".Activities.WelcomeActivity" />
+        <activity android:name=".Activities.UserInforActivity" />
+        <activity android:name=".Activities.SearchActivity" />
+        <activity android:name=".Activities.OnBoardActivity" />
+        <activity android:name=".Activities.HomeActivity" />
+        <activity android:name=".Activities.AuthActivity" />
+        <activity android:name=".Activities.AddPostActivity" />
+        <activity android:name=".Activities.AccountInformationActivity" />
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".Firebase.MessageService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

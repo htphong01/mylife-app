@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.htphong.mylife.ChattingActivity;
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Activities.ChattingActivity;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Room;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;

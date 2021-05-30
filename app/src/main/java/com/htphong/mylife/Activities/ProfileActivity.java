@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,14 +20,15 @@ import com.htphong.mylife.API.FriendService;
 import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Fragments.ProfileAlbumFragment;
 import com.htphong.mylife.Fragments.ProfilePostFragment;
-import com.htphong.mylife.Models.Friend;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.FriendPOJO;
 import com.htphong.mylife.POJO.MessagePOJO;
 import com.htphong.mylife.POJO.ProfilePOJO;
-import com.htphong.mylife.POJO.RoomPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Constant;
+import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -111,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     txtProfileName.setText(user.getUserName());
                     txtProfileFriendCount.setText(response.body().getFriendCount().toString());
                     txtProfilePostCount.setText(response.body().getPostCount().toString());
-                    txtProfileCreatedAt.setText("Đã tham gia vào " + Constant.convertDateTime(user.getCreatedAt()));
+                    txtProfileCreatedAt.setText("Đã tham gia vào " + Helper.convertDateTime(user.getCreatedAt()));
                     setFriendButton(response.body().getStatusFriend(), response.body().getRequestSendByYou());
                 }
             }

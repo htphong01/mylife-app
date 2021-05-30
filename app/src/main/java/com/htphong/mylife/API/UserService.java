@@ -1,7 +1,7 @@
 package com.htphong.mylife.API;
 
 import com.htphong.mylife.POJO.ProfilePOJO;
-import com.htphong.mylife.POJO.SearchPOJO;
+import com.htphong.mylife.POJO.UserPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
 
 import retrofit2.Call;
@@ -37,7 +37,7 @@ public interface UserService {
                                       @Field("phoneNumber") String phoneNumber, @Field("relationship") String relationship);
 
     @GET("api/search/user")
-    Call<SearchPOJO> getUser(@Query("q") String q);
+    Call<UserPOJO> getUser(@Query("q") String q);
 
     @GET("api/get/user")
     Call<ProfilePOJO> getFriend(@Query("id") String id);

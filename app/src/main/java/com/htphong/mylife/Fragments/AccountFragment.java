@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import com.htphong.mylife.AccountInformationActivity;
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Activities.AccountInformationActivity;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.R;
 import com.squareup.picasso.Picasso;

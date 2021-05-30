@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.htphong.mylife.Fragments.AccountBasicInformationFragment;
+import com.htphong.mylife.R;
 
 public class AccountInformationActivity extends AppCompatActivity implements View.OnClickListener {
     private FragmentManager fragmentManager;

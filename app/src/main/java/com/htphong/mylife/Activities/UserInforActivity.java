@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +28,7 @@ import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.ProfilePOJO;
+import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
 
 import java.io.ByteArrayOutputStream;

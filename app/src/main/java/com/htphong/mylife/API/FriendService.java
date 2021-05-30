@@ -1,8 +1,6 @@
 package com.htphong.mylife.API;
 
 import com.htphong.mylife.POJO.FriendPOJO;
-import com.htphong.mylife.POJO.ProfilePOJO;
-import com.htphong.mylife.POJO.SearchPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
 
 import retrofit2.Call;
@@ -14,7 +12,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface FriendService {
 

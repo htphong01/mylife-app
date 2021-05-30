@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
-import com.htphong.mylife.Constant;
+import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.ProfilePOJO;
 import com.htphong.mylife.R;

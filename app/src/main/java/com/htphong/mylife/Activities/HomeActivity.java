@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import com.htphong.mylife.Fragments.HomeFragment;
 import com.htphong.mylife.Fragments.ListChatRoomFragment;
 import com.htphong.mylife.Fragments.MenuFragment;
 import com.htphong.mylife.Fragments.NotificationFragment;
+import com.htphong.mylife.R;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 

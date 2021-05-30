@@ -1,4 +1,4 @@
-package com.htphong.mylife;
+package com.htphong.mylife.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +30,7 @@ import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.CommentPOJO;
 import com.htphong.mylife.POJO.PostPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
 

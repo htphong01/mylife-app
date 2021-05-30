@@ -114,4 +114,20 @@ public class Helper {
 
         return "";
     }
+
+    public static String convertDateTime(String time) {
+        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
+        oldFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy");
+        newFormat.setTimeZone(TimeZone.getTimeZone("GMT+07:00"));
+        try {
+            String reformattedStr = newFormat.format(oldFormat.parse(time));
+            return reformattedStr;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
+
 }

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.PostService;
 import com.htphong.mylife.Adapters.PostsAdapter;
-import com.htphong.mylife.HomeActivity;
+import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.PostPOJO;
 import com.htphong.mylife.R;
