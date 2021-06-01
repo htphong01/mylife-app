@@ -82,7 +82,6 @@ public class GivingTaskActivity extends AppCompatActivity implements View.OnClic
         edtDesc = findViewById(R.id.edt_giving_task_desc);
 
         recyclerReceiver = findViewById(R.id.giving_task_receiver_recycler);
-        recyclerReceiver.setHasFixedSize(true);
         recyclerReceiver.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
         recyclerReceiver.setItemViewCacheSize(10);
         recyclerReceiver.setDrawingCacheEnabled(true);

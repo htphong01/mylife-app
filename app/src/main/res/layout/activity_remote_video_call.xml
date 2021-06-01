@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LocalVideoCallActivity"
+    android:background="@drawable/background_meeting_invitation">
+
+    <FrameLayout
+        android:id="@+id/remote_video_call_frame_remote"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"/>
+
+    <FrameLayout
+        android:layout_margin="10dp"
+        android:id="@+id/remote_video_call_frame_local"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:background="#000"
+        android:layout_alignParentRight="true"/>
+
+    <LinearLayout
+        android:layout_marginBottom="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/remote_video_call_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reject"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_cancel_call_red"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/remote_video_call_reject_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reject"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_cancel_call_red"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:layout_weight="1"
+            android:id="@+id/remote_video_call_accept_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_accept_video_call"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

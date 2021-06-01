@@ -1,5 +1,6 @@
 package com.htphong.mylife.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,14 +12,17 @@ import android.util.Log;
 
 import com.htphong.mylife.R;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+
+    private String token = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // delay app 1.5s and then any thing in run method will run
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getApplication().getSharedPreferences("onBoard", Context.MODE_PRIVATE);
         boolean isFirstTime = preferences.getBoolean("isFirstTime",true);
         //default value true
-        if (isFirstTime){
+        if(isFirstTime){
             // if its true then its first time and we will change it false
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isFirstTime",false);

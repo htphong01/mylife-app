@@ -145,6 +145,7 @@ public class SignInFragment extends Fragment {
                     editor.putString("relationship", user.getRelationship());
                     editor.putString("postCount", response.body().getPostCount());
                     editor.putString("friendCount", response.body().getFriendCount());
+                    editor.putString("stringeeToken", user.getStringeeToken());
                     editor.putBoolean("isLoggedIn", true);
                     editor.apply();
                     startActivity(new Intent(((AuthActivity)getContext()), HomeActivity.class));

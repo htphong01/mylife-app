@@ -45,6 +45,17 @@ public class User {
     @SerializedName("isActive")
     private Integer isActive;
 
+    @SerializedName("stringeeToken")
+    private String stringeeToken;
+
+    public String getStringeeToken() {
+        return stringeeToken;
+    }
+
+    public void setStringeeToken(String stringeeToken) {
+        this.stringeeToken = stringeeToken;
+    }
+
     public String getCover() {
         return cover;
     }

@@ -37,7 +37,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.android.volley:volley:1.2.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
@@ -62,6 +61,8 @@ dependencies {
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
 
-    //Datetime picker
+    //Stringee
+    implementation 'com.stringee.sdk.android:stringee-android-sdk:1.7.0'
+    implementation 'com.android.volley:volley:1.2.0'
 
 }

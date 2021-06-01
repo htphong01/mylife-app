@@ -56,7 +56,6 @@ public class ListChatRoomFragment extends Fragment {
     private void init() {
         sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         recyclerView = view.findViewById(R.id.recycler_chat_room);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setItemViewCacheSize(10);
         recyclerView.setDrawingCacheEnabled(true);

@@ -65,7 +65,6 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
 
         recyclerView = findViewById(R.id.chat_setting_recycler_image);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
-        recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(10);
         adapter = new ImageAdapter(listImages);
         recyclerView.setAdapter(adapter);

@@ -1,11 +1,15 @@
 package com.htphong.mylife.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,18 +21,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.htphong.mylife.API.ChattingService;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.Adapters.MessageAdapter;
 import com.htphong.mylife.Models.Message;
+import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.MessagePOJO;
 import com.htphong.mylife.POJO.RoomPOJO;
+import com.htphong.mylife.POJO.UserPOJO;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
+import com.stringee.StringeeClient;
+import com.stringee.call.StringeeCall;
+import com.stringee.call.StringeeCall2;
+import com.stringee.exception.StringeeError;
+import com.stringee.listener.StringeeConnectionListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,10 +48,14 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import io.socket.client.IO;
@@ -63,6 +79,11 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
     private SharedPreferences userSharedPreferences;
     private SharedPreferences chatRoomSharedPreferences;
 
+    public static StringeeClient stringeeClient;
+    private String stringeeToken = "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSzJmQ29oeFRHZkx6ZkNac01YOVFHbldwSVZiYnphQzgtMTYyMjUzOTYwMSIsImlzcyI6IlNLMmZDb2h4VEdmTHpmQ1pzTVg5UUduV3BJVmJiemFDOCIsImV4cCI6MTYyNTEzMTYwMSwidXNlcklkIjoiMSJ9.IpQsU0n0pEc9nUtttsWnchgqrh7hJXxEqUrlp44S4sI";
+
+    public static Map<String, StringeeCall> callsMap = new HashMap<>();
+
     private Socket mSocket;
     {
         try {
@@ -80,7 +101,86 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
 
         socketOnEvents();
         mSocket.emit("newConnector", chatRoomSharedPreferences.getString("room_id", "12"));
+
         init();
+
+        initStringee();
+
+        requirePermission();
+    }
+
+    private void initStringee() {
+        stringeeClient = new StringeeClient(ChattingActivity.this);
+        stringeeClient.setConnectionListener(new StringeeConnectionListener() {
+            @Override
+            public void onConnectionConnected(StringeeClient stringeeClient, boolean b) {
+                runOnUiThread(() -> {
+                    Log.d("stringeeClient", stringeeClient.getUserId());
+                });
+            }
+
+            @Override
+            public void onConnectionDisconnected(StringeeClient stringeeClient, boolean b) {
+
+            }
+
+            @Override
+            public void onIncomingCall(StringeeCall stringeeCall) {
+                runOnUiThread(() -> {
+                    callsMap.put(stringeeCall.getCallId(), stringeeCall);
+                    Intent intent = new Intent(ChattingActivity.this, RemoteVideoCallActivity.class);
+                    intent.putExtra("call_id", stringeeCall.getCallId());
+                    startActivity(intent);
+                });
+            }
+
+            @Override
+            public void onIncomingCall2(StringeeCall2 stringeeCall2) {
+
+            }
+
+            @Override
+            public void onConnectionError(StringeeClient stringeeClient, StringeeError stringeeError) {
+
+            }
+
+            @Override
+            public void onRequestNewToken(StringeeClient stringeeClient) {
+
+            }
+
+            @Override
+            public void onCustomMessage(String s, JSONObject jsonObject) {
+
+            }
+
+            @Override
+            public void onTopicMessage(String s, JSONObject jsonObject) {
+
+            }
+        });
+
+        stringeeClient.connect(userSharedPreferences.getString("stringeeToken", stringeeToken));
+    }
+
+
+    private void requirePermission() {
+        ActivityCompat.requestPermissions(ChattingActivity.this, new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO
+        }, 1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 1) {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                Toast.makeText(ChattingActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     private void init() {
@@ -125,7 +225,6 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         });
 
         recyclerChatting = findViewById(R.id.recycler_conversation);
-        recyclerChatting.setHasFixedSize(true);
         recyclerChatting.setItemViewCacheSize(10);
         recyclerChatting.setDrawingCacheEnabled(true);
         recyclerChatting.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -148,7 +247,6 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
 
     private void socketOnEvents() {
         mSocket.on("receiveMessage", onNewMessage);
-        mSocket.on("receiveVideoCall", onNewVideoCall);
     }
 
     @Override
@@ -214,8 +312,29 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sendVideoCall() {
-        mSocket.emit("sendVideoCall", chatRoomSharedPreferences.getString("room_id", "12"));
-        startActivity(new Intent(ChattingActivity.this, SendingVideoCallActivity.class));
+        ChattingService chattingService = retrofit.create(ChattingService.class);
+        Call<UserPOJO> call = chattingService.getRoomUsers(chatRoomSharedPreferences.getString("room_id", "12"));
+        call.enqueue(new Callback<UserPOJO>() {
+            @Override
+            public void onResponse(Call<UserPOJO> call, Response<UserPOJO> response) {
+                if(response.isSuccessful() && response.body().getSuccess()) {
+                    List<User> users = response.body().getUsers();
+                    for(int i = 0; i < users.size(); i++) {
+                        if(!String.valueOf(users.get(i).getId()).equals(userSharedPreferences.getString("id", "1"))) {
+                            Intent intent = new Intent(ChattingActivity.this, LocalVideoCallActivity.class);
+                            intent.putExtra("from", stringeeClient.getUserId());
+                            intent.putExtra("to", String.valueOf(users.get(i).getId()));
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<UserPOJO> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void sendPhoneCall() {
@@ -317,17 +436,17 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private Emitter.Listener onNewVideoCall = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(ChattingActivity.this, InComingVideoCallActivity.class));
-                }
-            });
-        }
-    };
+//    private Emitter.Listener onNewVideoCall = new Emitter.Listener() {
+//        @Override
+//        public void call(final Object... args) {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    startActivity(new Intent(ChattingActivity.this, ReceiveVideoCallActivity.class));
+//                }
+//            });
+//        }
+//    };
 
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override

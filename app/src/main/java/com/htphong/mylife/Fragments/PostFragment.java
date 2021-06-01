@@ -80,7 +80,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         commentRecyclerView = view.findViewById(R.id.post_recycler_comment);
         commentRecyclerView.setNestedScrollingEnabled(true);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        commentRecyclerView.setHasFixedSize(true);
         commentRecyclerView.setItemViewCacheSize(10);
         commentRecyclerView.setDrawingCacheEnabled(true);
         commentRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
