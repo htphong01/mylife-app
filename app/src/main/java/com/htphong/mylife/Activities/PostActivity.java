@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -68,8 +69,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         retrofit = new Client().getRetrofit(getApplicationContext());
         fragmentManager = getSupportFragmentManager();
         postFragment = new PostFragment();
+
         Bundle bundle = new Bundle();
         bundle.putString("post_id", String.valueOf(getIntent().getExtras().getInt("post_id")));
+
         postFragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.framePostActivyContainer, postFragment).commit();
         btnBack = findViewById(R.id.post_back_btn);
@@ -87,10 +90,11 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getPost() {
         PostService postService = retrofit.create(PostService.class);
-        Call<PostPOJO> call = postService.getSpecificPost(String.valueOf(post_id));
+        Call<PostPOJO> call = postService.getSpecificPost(String.valueOf(getIntent().getExtras().getInt("post_id")));
         call.enqueue(new Callback<PostPOJO>() {
             @Override
             public void onResponse(Call<PostPOJO> call, Response<PostPOJO> response) {
+                Log.d("PostActivityRes: ", response.message());
                 if(response.isSuccessful() && response.body().getSuccess()) {
                     Post post = response.body().getPosts().get(0);
                     txtPostTitle.setText("Bài viết của " + post.getUser().getUserName());

@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:text="Thanh Phong"
                             android:textColor="#000000"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -131,7 +131,7 @@
                     android:layout_weight="1"
                     android:text="Bạn bè"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -165,7 +165,7 @@
                     android:layout_weight="1"
                     android:text="Danh sách sự kiện"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -199,7 +199,7 @@
                     android:layout_weight="1"
                     android:text="Album"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -233,7 +233,7 @@
                     android:layout_weight="1"
                     android:text="Thông báo"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -267,7 +267,7 @@
                     android:layout_weight="1"
                     android:text="Cài đặt"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -301,7 +301,7 @@
                     android:layout_weight="1"
                     android:text="Hỗ trợ"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -335,7 +335,7 @@
                     android:layout_weight="1"
                     android:text="Đăng xuất"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <ImageButton

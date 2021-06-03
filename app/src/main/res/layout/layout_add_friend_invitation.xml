@@ -5,38 +5,44 @@
     android:layout_height="match_parent"
     android:background="#fff">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/layout_add_friend_swipe">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:backgroundTint="@color/colorWhite"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@color/colorWhite"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lời mời kết bạn"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textColor="@color/colorBlack"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/colorWhite"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/recycler_add_friend"/>
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:backgroundTint="@color/colorWhite"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lời mời kết bạn"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorBlack"
+                    />
 
-    </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/recycler_add_friend"/>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

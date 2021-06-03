@@ -1,17 +1,24 @@
 package com.htphong.mylife.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.htphong.mylife.Activities.PostActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
+import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Notifications;
 import com.htphong.mylife.R;
@@ -53,6 +60,43 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Picasso.get().load(Constant.DOMAIN + notification.getImage()).resize(350,350).centerCrop().into(holder.userImage);
         holder.txtContent.setText(Html.fromHtml(notification.getContent()));
         holder.txtTime.setText(Helper.timeDifferent(notification.getCreatedAt()));
+        holder.layoutNotification.setOnClickListener(v -> {
+            notificationClicked(notification);
+        });
+    }
+
+    private void notificationClicked(Notifications notification) {
+        switch (notification.getType()) {
+            case 1:
+            case 4: {
+                gotoProfile(String.valueOf(notification.getSenderId()));
+                break;
+            }
+            case 2:
+            case 3: {
+                goToPost(notification.getLink());
+                break;
+            }
+
+        }
+    }
+
+    private void goToPost(String post_id) {
+        Intent intent = new Intent(context, PostActivity.class);
+        intent.putExtra("post_id", Integer.parseInt(post_id));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    private void gotoProfile(String user_id) {
+        Intent intent = new Intent(context, ProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("user_id", user_id);
+        SharedPreferences userPref = context.getApplicationContext().getSharedPreferences("user_target", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userPref.edit();
+        editor.putString("id", user_id);
+        editor.apply();
+        context.startActivity(intent);
     }
 
     @Override
@@ -77,6 +121,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView userImage;
         private TextView txtContent, txtTime;
+        private LinearLayout layoutNotification;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,6 +129,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             userImage = itemView.findViewById(R.id.notification_user_image);
             txtContent = itemView.findViewById(R.id.txt_notification_content);
             txtTime = itemView.findViewById(R.id.txt_notification_time);
+            layoutNotification = itemView.findViewById(R.id.layout_notification_item);
         }
     }
 }

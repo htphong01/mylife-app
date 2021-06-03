@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.CommentService;
@@ -48,6 +49,9 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     private ImageView imgPostPhoto;
     private CircleImageView imgPostAuthorAvatar;
     private LinearLayout btnLikePost, btnCommentPost;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     private RecyclerView commentRecyclerView;
     private RecyclerView.Adapter commentAdapter;
     private ArrayList<Comment> commentArrayList = new ArrayList<>();
@@ -86,6 +90,12 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         commentAdapter = new CommentAdapter(commentArrayList, getContext());
         commentRecyclerView.setAdapter(commentAdapter);
 
+        swipeRefreshLayout = view.findViewById(R.id.layout_post_fragment_swipe);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getComments();
+            getPost();
+        });
+
         btnLikePost.setOnClickListener(this);
         btnCommentPost.setOnClickListener(this);
 
@@ -109,11 +119,13 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     Picasso.get().load(Constant.DOMAIN + post.getPhoto()).into(imgPostPhoto);
                     postLikeIcon.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_red : R.drawable.ic_baseline_favorite_outline);
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<PostPOJO> call, Throwable t) {
                 Log.d("PostActivityError: ", t.getMessage());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -130,11 +142,13 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     commentArrayList.addAll(commentList);
                     commentAdapter.notifyDataSetChanged();
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<CommentPOJO> call, Throwable t) {
                 Log.d("PostActivityError: ", t.getMessage());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

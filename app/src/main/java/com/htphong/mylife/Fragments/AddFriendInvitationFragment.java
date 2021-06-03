@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.FriendService;
@@ -31,6 +32,7 @@ public class AddFriendInvitationFragment extends Fragment {
 
     private View view;
     private Context mContext;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView friendRequestRecyclerView;
     private RecyclerView.Adapter friendRequestAdapter;
     private ArrayList<Friend> friendArrayList = new ArrayList<>();
@@ -58,9 +60,15 @@ public class AddFriendInvitationFragment extends Fragment {
         friendRequestRecyclerView.setDrawingCacheEnabled(true);
         friendRequestAdapter = new FriendInvitationAdapter(friendArrayList, getContext());
         friendRequestRecyclerView.setAdapter(friendRequestAdapter);
+
+        swipeRefreshLayout = view.findViewById(R.id.layout_add_friend_swipe);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getFriendRequest();
+        });
     }
 
     private void getFriendRequest() {
+        friendArrayList.clear();
         Retrofit retrofit = new Client().getRetrofit(getContext());
         FriendService friendService = retrofit.create(FriendService.class);
         Call<FriendPOJO> call = friendService.getFriendRequests();
@@ -71,11 +79,13 @@ public class AddFriendInvitationFragment extends Fragment {
                     friendArrayList.addAll(response.body().getFriends());
                     friendRequestAdapter.notifyDataSetChanged();
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<FriendPOJO> call, Throwable t) {
                 Log.d("FriendRequestErr: ", t.getMessage());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

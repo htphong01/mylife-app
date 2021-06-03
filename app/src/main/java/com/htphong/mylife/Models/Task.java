@@ -7,6 +7,9 @@ public class Task {
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("title")
+    @Expose
+    private String title;
     @SerializedName("creater_id")
     @Expose
     private Integer createrId;
@@ -22,6 +25,12 @@ public class Task {
     @SerializedName("deadline")
     @Expose
     private String deadline;
+    @SerializedName("note")
+    @Expose
+    private String note;
+    @SerializedName("file")
+    @Expose
+    private String file;
     @SerializedName("isSubmitted")
     @Expose
     private Integer isSubmitted;
@@ -45,12 +54,28 @@ public class Task {
     @Expose
     private String createrAvatar;
 
+    @SerializedName("receiver_name")
+    @Expose
+    private String receiverName;
+
+    @SerializedName("receiver_avatar")
+    @Expose
+    private String receiverAvatar;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getCreaterId() {
@@ -91,6 +116,22 @@ public class Task {
 
     public void setDeadline(String deadline) {
         this.deadline = deadline;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public Integer getIsSubmitted() {
@@ -147,5 +188,21 @@ public class Task {
 
     public void setCreaterAvatar(String createrAvatar) {
         this.createrAvatar = createrAvatar;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverAvatar() {
+        return receiverAvatar;
+    }
+
+    public void setReceiverAvatar(String receiverAvatar) {
+        this.receiverAvatar = receiverAvatar;
     }
 }

@@ -50,7 +50,6 @@
         android:layout_marginTop="20dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/avatar_example"
         android:layout_gravity="center"/>
 
     <TextView
@@ -58,7 +57,6 @@
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Một bé cute"
         android:textStyle="bold"
         android:textSize="18dp"
         android:textColor="#000"
@@ -85,7 +83,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_search_30"/>
+                android:src="@drawable/ic_search_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -295,7 +293,40 @@
             android:layout_marginLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Tạo nhóm với Một bé cute"
+            android:text="Tạo nhóm chat"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/border_bottom"
+        android:layout_marginLeft="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/chat_setting_task_management_btn"
+        android:paddingBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_task_manage"/>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Quản lý công việc"
             android:textSize="16dp"
             android:textColor="#000"
             android:gravity="center_vertical"/>
@@ -310,39 +341,6 @@
 
     <LinearLayout
         android:id="@+id/chat_setting_block_btn"
-        android:paddingBottom="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_danger"/>
-
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Báo xấu"
-            android:textSize="16dp"
-            android:textColor="#000"
-            android:gravity="center_vertical"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:background="@drawable/border_bottom"
-        android:layout_marginLeft="54dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:id="@+id/chat_setting_report_btn"
         android:paddingBottom="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"

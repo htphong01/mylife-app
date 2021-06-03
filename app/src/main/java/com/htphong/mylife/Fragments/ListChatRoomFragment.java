@@ -23,6 +23,8 @@ import com.htphong.mylife.POJO.RoomPOJO;
 import com.htphong.mylife.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,10 +84,12 @@ public class ListChatRoomFragment extends Fragment {
             @Override
             public void onResponse(Call<RoomPOJO> call, Response<RoomPOJO> response) {
                 if(response.isSuccessful() && response.body().getSuccess()) {
-                    roomArrayList.addAll(response.body().getRooms());
+                    List<Room> listRoom = response.body().getRooms();
+                    Collections.reverse(listRoom);
+                    roomArrayList.addAll(listRoom);
                     chatRoomAdapter.notifyDataSetChanged();
-                    swipeRefreshLayout.setRefreshing(false);
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override

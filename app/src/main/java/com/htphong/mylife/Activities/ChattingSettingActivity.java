@@ -40,7 +40,7 @@ import retrofit2.Retrofit;
 public class ChattingSettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton btnBack, icFind, icProfile, icNotification, icTask;
-    private LinearLayout btnFindMessage, btnProfile, btnNotification, btnTask, btnChangeNickname, btnImages, btnCreateGroup, btnBlock, btnReport, btnDelete;
+    private LinearLayout btnFindMessage, btnProfile, btnNotification, btnTask, btnChangeNickname, btnImages, btnCreateGroup, btnBlock, btnTaskManagement, btnDelete;
     private CircleImageView chatAvatar;
     private TextView chatName;
     private RecyclerView recyclerView;
@@ -86,7 +86,7 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
         btnImages = findViewById(R.id.chat_setting_images_btn);
         btnCreateGroup = findViewById(R.id.chat_setting_create_group_btn);
         btnBlock = findViewById(R.id.chat_setting_block_btn);
-        btnReport = findViewById(R.id.chat_setting_report_btn);
+        btnTaskManagement = findViewById(R.id.chat_setting_task_management_btn);
         btnDelete = findViewById(R.id.chat_setting_delete_btn);
 
         icFind.setOnClickListener(this);
@@ -103,12 +103,15 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
         btnImages.setOnClickListener(this);
         btnCreateGroup.setOnClickListener(this);
         btnBlock.setOnClickListener(this);
-        btnReport.setOnClickListener(this);
+        btnTaskManagement.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         getRoomInformation();
     }
 
     private void getRoomInformation() {
+        chatName.setText(roomSharedPreferences.getString("room_name", ""));
+        Picasso.get().load(Constant.DOMAIN + roomSharedPreferences.getString("room_photo", "")).resize(350,350).centerCrop().into(chatAvatar);
+
         retrofit.create(ChattingService.class).getChatRoom(roomSharedPreferences.getString("room_id", "12"))
         .enqueue(new Callback<RoomPOJO>() {
             @Override
@@ -118,8 +121,6 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
                     Room room = (Room)response.body().getRooms().get(0);
                     listImages.addAll(room.getImages());
                     adapter.notifyDataSetChanged();
-                    Picasso.get().load(Constant.DOMAIN + room.getPhoto()).resize(350, 350).centerCrop().into(chatAvatar);
-                    chatName.setText(room.getName());
                     user_id = room.getUserId();
                     room_name = room.getName();
                 }
@@ -136,7 +137,7 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.chat_setting_back_btn: {
-                super.onBackPressed();
+                startActivity(new Intent(ChattingSettingActivity.this, ChattingActivity.class));
                 break;
             }
 
@@ -158,6 +159,11 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
 
             case R.id.chat_setting_images_btn: {
                 showImageGallery();
+                break;
+            }
+
+            case R.id.chat_setting_task_management_btn: {
+                startActivity(new Intent(ChattingSettingActivity.this, TaskManagementActivity.class));
                 break;
             }
         }

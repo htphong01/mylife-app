@@ -56,44 +56,24 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder>
     public void onBindViewHolder(@NonNull PostsHolder holder, int position) {
         Post post = (Post) list.get(position);
         Picasso.get().load(Constant.DOMAIN + post.getUser().getPhoto()).resize(350,350).centerCrop().into(holder.imgProfile);
-        Picasso.get().load(Constant.DOMAIN + post.getPhoto()).resize(350,600).centerInside().into(holder.imgPost);
-        holder.imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToProfile(post);
-            }
-        });
-        holder.imgPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPost(post);
-            }
-        });
-        holder.txtName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToProfile(post);
-            }
-        });
+        Picasso.get().load(Constant.DOMAIN + post.getPhoto()).into(holder.imgPost);
+        holder.imgProfile.setOnClickListener(v -> goToProfile(post));
+        holder.imgPost.setOnClickListener(v -> goToPost(post));
+        holder.txtName.setOnClickListener(v -> goToProfile(post));
         holder.txtName.setText(post.getUser().getUserName());
         holder.txtDesc.setText(post.getDescription());
-        holder.txtComments.setText("Xem tât cả " + post.getCommentsCount() + " bình luận");
+        holder.txtDesc.setOnClickListener(v -> {
+            goToPost(post);
+        });
+        holder.txtComments.setText("Xem tất cả " + post.getCommentsCount() + " bình luận");
         holder.txtLikes.setText(post.getLikesCount() + " lượt thích");
         holder.txtTime.setText(Helper.timeDifferent(post.getCreatedAt()));
         holder.btnLike.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_red : R.drawable.ic_baseline_favorite_outline);
-        holder.btnLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.btnLike.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_outline : R.drawable.ic_baseline_favorite_red);
-                likePost(position);
-            }
+        holder.btnLike.setOnClickListener(v -> {
+            holder.btnLike.setImageResource(post.getSelfLike() ? R.drawable.ic_baseline_favorite_outline : R.drawable.ic_baseline_favorite_red);
+            likePost(position);
         });
-        holder.btnComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPost(post);
-            }
-        });
+        holder.btnComment.setOnClickListener(v -> goToPost(post));
     }
 
     private void goToPost(Post post) {

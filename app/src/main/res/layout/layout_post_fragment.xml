@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/layout_post_fragment_swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,8 +32,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:id="@+id/post_img_avatar"
-                            android:src="@color/colorLightGray"/>
+                            android:id="@+id/post_img_avatar"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -44,7 +48,7 @@
                                 android:id="@+id/txt_post_author_name"
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
-                                android:text="Hồ Thanh Phong"/>
+                                android:text=""/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -52,7 +56,7 @@
                                 android:textSize="11sp"
                                 android:id="@+id/txt_post_different_time"
                                 android:textColor="@color/colorLightGray"
-                                android:text="2 ngày trước"/>
+                                android:text=""/>
 
                         </LinearLayout>
 
@@ -76,14 +80,13 @@
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="Loremp ipsum"/>
+                        android:text=""/>
 
                     <ImageView
                         android:id="@+id/img_post_photo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@color/colorLightGray" />
+                        android:adjustViewBounds="true" />
 
                     <LinearLayout
                         android:background="@drawable/border_bottom"
@@ -166,7 +169,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5 người thích bài viết này"/>
+                        android:text="0 người thích bài viết này"/>
 
                 </LinearLayout>
 
@@ -178,5 +181,9 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>

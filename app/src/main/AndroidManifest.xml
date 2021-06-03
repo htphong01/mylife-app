@@ -23,7 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.RemoteVideoCallActivity"></activity>
+        <activity android:name=".Activities.TaskControlDetailsActivity"></activity>
+        <activity android:name=".Activities.TaskDetailsActivity" />
+        <activity android:name=".Activities.TaskManagementActivity" />
+        <activity android:name=".Activities.RemoteVideoCallActivity" />
         <activity android:name=".Activities.LocalVideoCallActivity" />
         <activity android:name=".Activities.GivingTaskActivity" />
         <activity android:name=".Activities.ChattingSettingActivity" />

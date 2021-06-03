@@ -79,8 +79,7 @@
                 android:padding="6dp"
                 android:id="@+id/img_profile_avatar"
                 android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/nouser1"/>
+                android:layout_height="150dp"/>
 
             <LinearLayout
                 android:layout_marginLeft="10dp"
@@ -146,7 +145,6 @@
             <TextView
                 android:id="@+id/txt_profile_name"
                 android:layout_marginTop="20dp"
-                android:text="Thanh Phong"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="#373737"
@@ -160,7 +158,6 @@
                 android:id="@+id/txt_profile_created_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đã tham gia vào 10.05.2021"
                 android:textSize="16dp"
                 android:textColor="#C0C0C0"/>
 

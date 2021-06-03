@@ -20,7 +20,6 @@
             android:id="@+id/img_layout_task_receiver_avatar"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/avatar_example"
             android:background="@drawable/circle_border_black"/>
 
         <TextView
@@ -28,7 +27,6 @@
             android:id="@+id/txt_layout_task_receiver_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Một bé cute"
             android:textSize="12sp"
             android:textColor="@color/colorBlack"/>
 

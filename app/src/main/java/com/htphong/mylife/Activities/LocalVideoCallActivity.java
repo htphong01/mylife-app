@@ -7,9 +7,11 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.htphong.mylife.R;
@@ -23,10 +25,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LocalVideoCallActivity extends AppCompatActivity {
 
-    private FrameLayout vRemote, vLocal, vLocalBig;
+    private FrameLayout vRemote, vLocal;
 
     private CircleImageView imgPhoto;
     private TextView txtName;
+
+    private LinearLayout llInfo;
 
     private ImageButton btnCancel;
 
@@ -67,11 +71,8 @@ public class LocalVideoCallActivity extends AppCompatActivity {
                     }
 
                     case ANSWERED: {
-                        vLocalBig.removeAllViews();
-                        vLocal.removeAllViews();
-                        vLocal.addView(stringeeCall.getLocalView());
-                        txtName.setVisibility(View.GONE);
-                        imgPhoto.setVisibility(View.GONE);
+                        vLocal.setVisibility(View.VISIBLE);
+                        llInfo.setVisibility(View.GONE);
                         break;
                     }
 
@@ -99,12 +100,8 @@ public class LocalVideoCallActivity extends AppCompatActivity {
                     mMediaState = mediaState;
                     if(mediaState == StringeeCall.MediaState.CONNECTED) {
                         if(state == StringeeCall.SignalingState.ANSWERED) {
-                            vLocalBig.removeAllViews();
-                            vLocalBig.setVisibility(View.GONE);
-                            vLocal.removeAllViews();
-                            vLocal.addView(stringeeCall.getLocalView());
-                            txtName.setVisibility(View.GONE);
-                            imgPhoto.setVisibility(View.GONE);
+                            vLocal.setVisibility(View.VISIBLE);
+                            llInfo.setVisibility(View.GONE);
                         }
                     }
 
@@ -114,8 +111,8 @@ public class LocalVideoCallActivity extends AppCompatActivity {
             @Override
             public void onLocalStream(StringeeCall stringeeCall) {
                 runOnUiThread(() -> {
-                    vLocalBig.removeAllViews();
-                    vLocalBig.addView(stringeeCall.getLocalView());
+                    vLocal.removeAllViews();
+                    vLocal.addView(stringeeCall.getLocalView());
                     stringeeCall.renderLocalView(true);
                 });
             }
@@ -141,12 +138,15 @@ public class LocalVideoCallActivity extends AppCompatActivity {
         SharedPreferences roomSharedPreferences = getApplicationContext().getSharedPreferences("chat_room", MODE_PRIVATE);
         vRemote = findViewById(R.id.local_video_call_frame_remote);
         vLocal = findViewById(R.id.local_video_call_frame_local);
-        vLocalBig = findViewById(R.id.local_video_call_frame_local_big);
+        vLocal.setVisibility(View.GONE);
+
         btnCancel = findViewById(R.id.local_video_call_cancel_btn);
         imgPhoto = findViewById(R.id.local_video_call_photo);
         txtName  = findViewById(R.id.local_video_call_name);
         Picasso.get().load(Constant.DOMAIN + roomSharedPreferences.getString("room_photo", "")).resize(450,450).centerCrop().into(imgPhoto);
         txtName.setText(roomSharedPreferences.getString("room_name", ""));
+
+        llInfo = findViewById(R.id.local_video_call_infor);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

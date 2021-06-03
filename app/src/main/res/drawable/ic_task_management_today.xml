@@ -1,0 +1,15 @@
+<vector android:height="26dp" android:viewportHeight="27"
+    android:viewportWidth="27" android:width="26dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#00000000" android:fillType="evenOdd"
+        android:pathData="M5.7857,3.2143H21.2142C21.8962,3.2143 22.5503,3.4852 23.0325,3.9674C23.5147,4.4497 23.7857,5.1037 23.7857,5.7857V21.2014C23.7857,21.8834 23.5147,22.5375 23.0325,23.0197C22.5503,23.5019 21.8962,23.7729 21.2142,23.7729H5.7857C5.1037,23.7729 4.4496,23.5019 3.9674,23.0197C3.4852,22.5375 3.2142,21.8834 3.2142,21.2014V5.7857C3.2142,5.1037 3.4852,4.4497 3.9674,3.9674C4.4496,3.4852 5.1037,3.2143 5.7857,3.2143V3.2143Z"
+        android:strokeAlpha="0.64" android:strokeColor="#FE2C1A"
+        android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeWidth="1"/>
+    <path android:fillColor="#00000000"
+        android:pathData="M3.4187,8.3572H23.7857"
+        android:strokeAlpha="0.64" android:strokeColor="#FE2C1A"
+        android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeWidth="1"/>
+    <path android:fillAlpha="0.64" android:fillColor="#FE2C1A"
+        android:fillType="evenOdd" android:pathData="M8.7633,16.9136V15.5263H9.8947C10.7536,15.5263 11.3373,15.0184 11.3373,14.2766C11.3373,13.599 10.8038,13.0847 9.9192,13.0847C9.0025,13.0847 8.438,13.5553 8.375,14.3653H6.6213C6.6869,12.6951 7.9726,11.5714 10.013,11.5714C12.0226,11.5714 13.1399,12.6823 13.1335,14.0079C13.127,15.1059 12.4366,15.8284 11.4633,16.0663V16.1859C12.7246,16.3671 13.4909,17.1707 13.4909,18.3831C13.4909,19.971 11.9969,21.096 9.95,21.096C7.9032,21.096 6.5095,19.9761 6.4285,18.2623H8.2426C8.2992,19.0286 8.9523,19.5184 9.9256,19.5184C10.886,19.5184 11.5585,18.9964 11.5585,18.2121C11.5585,17.4086 10.9298,16.9136 9.9128,16.9136H8.7633Z"/>
+    <path android:fillAlpha="0.64" android:fillColor="#FE2C1A"
+        android:fillType="evenOdd" android:pathData="M17.3776,20.8633V13.6491H17.2657L15.0427,15.1817V13.4177L17.384,11.8041H19.274V20.8633H17.3776Z"/>
+</vector>

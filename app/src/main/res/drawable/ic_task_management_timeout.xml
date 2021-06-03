@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="26dp"
+    android:height="26dp"
+    android:viewportWidth="26"
+    android:viewportHeight="26">
+  <path
+      android:strokeWidth="1"
+      android:pathData="M5.5714,3.0952H20.4286C21.0853,3.0952 21.7151,3.3561 22.1795,3.8205C22.6439,4.2849 22.9048,4.9147 22.9048,5.5714V20.4286C22.9048,21.0853 22.6439,21.7151 22.1795,22.1795C21.7151,22.6439 21.0853,22.9048 20.4286,22.9048H5.5714C4.9147,22.9048 4.2849,22.6439 3.8205,22.1795C3.3561,21.7151 3.0952,21.0853 3.0952,20.4286V5.5714C3.0952,4.9147 3.3561,4.2849 3.8205,3.8205C4.2849,3.3561 4.9147,3.0952 5.5714,3.0952V3.0952Z"
+      android:strokeAlpha="0.79"
+      android:strokeLineJoin="round"
+      android:fillColor="#00000000"
+      android:fillType="evenOdd"
+      android:strokeColor="#06A5FF"
+      android:strokeLineCap="round"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M3.0952,8.0476H22.9048"
+      android:strokeAlpha="0.79"
+      android:strokeLineJoin="round"
+      android:fillColor="#00000000"
+      android:strokeColor="#06A5FF"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M13,14.2381C13.6838,14.2381 14.2381,13.6838 14.2381,13C14.2381,12.3162 13.6838,11.7619 13,11.7619C12.3162,11.7619 11.7619,12.3162 11.7619,13C11.7619,13.6838 12.3162,14.2381 13,14.2381Z"
+      android:fillColor="#06A5FF"
+      android:fillAlpha="0.79"/>
+  <path
+      android:pathData="M8.0476,14.2381C8.7314,14.2381 9.2857,13.6838 9.2857,13C9.2857,12.3162 8.7314,11.7619 8.0476,11.7619C7.3639,11.7619 6.8095,12.3162 6.8095,13C6.8095,13.6838 7.3639,14.2381 8.0476,14.2381Z"
+      android:fillColor="#06A5FF"
+      android:fillAlpha="0.79"/>
+  <path
+      android:pathData="M8.0476,19.1905C8.7314,19.1905 9.2857,18.6362 9.2857,17.9524C9.2857,17.2686 8.7314,16.7143 8.0476,16.7143C7.3639,16.7143 6.8095,17.2686 6.8095,17.9524C6.8095,18.6362 7.3639,19.1905 8.0476,19.1905Z"
+      android:fillColor="#06A5FF"
+      android:fillAlpha="0.79"/>
+</vector>

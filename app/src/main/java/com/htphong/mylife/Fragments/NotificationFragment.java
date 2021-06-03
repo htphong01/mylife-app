@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.NotificationService;
@@ -32,6 +33,7 @@ import retrofit2.Retrofit;
 public class NotificationFragment extends Fragment {
     private View view;
     private Context mContext;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView notifyRecyclerview;
     private RecyclerView.Adapter notifyAdapter;
     private ArrayList<Notifications> list = new ArrayList<Notifications>();
@@ -45,10 +47,6 @@ public class NotificationFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    }
-
     public void init() {
         notifyRecyclerview = view.findViewById(R.id.notify_recycler);
 //        notifyRecyclerview.setHasFixedSize(true);
@@ -60,6 +58,12 @@ public class NotificationFragment extends Fragment {
         notifyAdapter = new NotificationAdapter(getContext(), list);
         notifyAdapter.setHasStableIds(true);
         notifyRecyclerview.setAdapter(notifyAdapter);
+
+        swipeRefreshLayout = view.findViewById(R.id.layout_notification_swipe);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getNotification();
+        });
+
         getNotification();
     }
 
@@ -79,11 +83,14 @@ public class NotificationFragment extends Fragment {
                     }
                     notifyAdapter.notifyDataSetChanged();
                 }
+
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<NotificationPOJO> call, Throwable t) {
                 Log.d("NotificationError:", t.getMessage());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

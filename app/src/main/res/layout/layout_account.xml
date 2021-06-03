@@ -112,7 +112,6 @@
                     android:id="@+id/txt_account_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thanh Phong"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="#373737"/>
@@ -121,7 +120,6 @@
                     android:id="@+id/txt_account_created_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đã tham gia vào 10.05.2021"
                     android:textSize="16dp"
                     android:textColor="#C0C0C0"/>
 

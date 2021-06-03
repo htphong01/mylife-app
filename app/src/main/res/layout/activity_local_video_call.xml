@@ -21,26 +21,37 @@
         android:background="#000"
         android:layout_alignParentRight="true"/>
 
-    <FrameLayout
-        android:id="@+id/local_video_call_frame_local_big"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:layout_alignParentRight="true"/>
-
     <LinearLayout
-        android:id="@+id/local_video_call_info"
-        android:layout_marginTop="160dp"
+        android:id="@+id/local_video_call_infor"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_videocam_36"
+            android:background="@android:color/transparent"
+            />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang kết nối ..."
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_gravity="center"
             android:id="@+id/local_video_call_photo"
+            android:layout_marginTop="160dp"
             android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/local_video_call_name"
@@ -52,7 +63,6 @@
             android:textSize="20dp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"/>
-
 
     </LinearLayout>
 

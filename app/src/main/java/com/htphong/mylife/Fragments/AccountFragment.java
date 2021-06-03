@@ -3,7 +3,11 @@ package com.htphong.mylife.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +22,30 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.htphong.mylife.API.Client;
+import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Activities.AccountInformationActivity;
+import com.htphong.mylife.POJO.StatusPOJO;
+import com.htphong.mylife.POJO.UserPOJO;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Helper;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+import static android.app.Activity.RESULT_OK;
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
     private View view;
@@ -44,6 +60,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Post> postArrayList = new ArrayList<>();
     private Fragment childFragment;
     private FragmentTransaction transaction;
+    private static final int CHANGE_AVATAR = 5;
+    private Bitmap bitmap = null;
 
     @Nullable
     @Override
@@ -72,6 +90,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         btnAccountViewInfor = view.findViewById(R.id.btn_account_view_infor);
         accountPostPage = view.findViewById(R.id.account_fragment_post);
         accountAlbumPage = view.findViewById(R.id.account_fragment_album);
+
+        accountImgAvatar.setOnClickListener(this);
         accountPostPage.setOnClickListener(this);
         accountAlbumPage.setOnClickListener(this);
         btnAccountViewInfor.setOnClickListener(this);
@@ -129,8 +149,50 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 transaction.replace(R.id.frameAccountContainer, childFragment).commit();
                 break;
             }
+
+            case R.id.account_img_avatar: {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, CHANGE_AVATAR);
+                break;
+            }
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==CHANGE_AVATAR && resultCode== RESULT_OK ){
+            Uri imgUri = data.getData();
+            accountImgAvatar.setImageURI(imgUri);
 
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),imgUri);
+                changeAvatar(Helper.bitmapToString(bitmap));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void changeAvatar(String photo) {
+        Retrofit retrofit = new Client().getRetrofit(getContext());
+        retrofit.create(UserService.class)
+                .changeAvatar(photo)
+                .enqueue(new Callback<StatusPOJO>() {
+                    @Override
+                    public void onResponse(Call<StatusPOJO> call, Response<StatusPOJO> response) {
+                        if(response.isSuccessful() && response.body().getSuccess()) {
+                            SharedPreferences.Editor editor = userSharedPreferences.edit();
+                            editor.putString("avatar", response.body().getMessage());
+                            editor.apply();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusPOJO> call, Throwable t) {
+                        Log.d("ChangeAvatar:", t.getMessage());
+                    }
+                });
+    }
 }

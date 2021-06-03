@@ -25,6 +25,9 @@ public interface PostService {
     @GET("api/posts/{id}")
     Call<PostPOJO> getSpecificPost(@Path("id") String id);
 
+    @GET("api/posts/search")
+    Call<PostPOJO> searchPost(@Query("q") String q);
+
     @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("api/likes")

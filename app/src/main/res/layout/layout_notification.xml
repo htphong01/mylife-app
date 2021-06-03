@@ -7,38 +7,45 @@
     android:orientation="vertical"
     android:background="@color/colorWhite">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/layout_notification_swipe">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/notification_label"
-                android:backgroundTint="@color/colorWhite"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@color/colorWhite"
-                android:layout_marginBottom="10dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Thông báo mới"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textColor="@color/colorBlack"
-                />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/colorWhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/notify_recycler"/>
+                <TextView
+                    android:id="@+id/notification_label"
+                    android:backgroundTint="@color/colorWhite"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thông báo mới"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorBlack"
+                    />
 
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notify_recycler"/>
 
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

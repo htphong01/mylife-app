@@ -31,6 +31,11 @@ public interface UserService {
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
+    @PUT("api/user/change-avatar")
+    Call<StatusPOJO> changeAvatar(@Field("photo") String photo);
+
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
     @PUT("api/user")
     Call<ProfilePOJO> updateUserInfor(@Field("name") String name, @Field("dateOfBirth") String dateOfBirth,  @Field("gender") String gender,
                                       @Field("address") String address, @Field("education") String education,  @Field("work") String work,

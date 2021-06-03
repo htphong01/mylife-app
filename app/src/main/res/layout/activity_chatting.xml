@@ -39,8 +39,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_conversation_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/avatar_example"/>
 
             <TextView
@@ -58,7 +58,7 @@
 
             <ImageButton
                 android:id="@+id/chat_ic_call"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -66,7 +66,7 @@
 
             <ImageButton
                 android:id="@+id/chat_ic_video_call"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -74,7 +74,7 @@
 
             <ImageButton
                 android:id="@+id/chat_ic_bar"
-                android:padding="10dp"
+                android:padding="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -86,10 +86,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_conversation"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="50dp" />
 
     <LinearLayout
         android:background="@drawable/border_top"

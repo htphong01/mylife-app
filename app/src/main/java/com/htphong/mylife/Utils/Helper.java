@@ -90,7 +90,7 @@ public class Helper {
         return convTime;
     }
 
-    private static String changeTimeZone(String time) {
+    public static String changeTimeZone(String time) {
         SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
         oldFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
@@ -120,6 +120,18 @@ public class Helper {
         oldFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy");
         newFormat.setTimeZone(TimeZone.getTimeZone("GMT+07:00"));
+        try {
+            String reformattedStr = newFormat.format(oldFormat.parse(time));
+            return reformattedStr;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
+    public static String formatDeadlineTime(String time) {
+        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat newFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
         try {
             String reformattedStr = newFormat.format(oldFormat.parse(time));
             return reformattedStr;
