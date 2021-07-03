@@ -1,6 +1,8 @@
 package com.htphong.mylife.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.htphong.mylife.Activities.HomeActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
+import com.htphong.mylife.Fragments.AccountFragment;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Comment;
 import com.htphong.mylife.R;
@@ -51,6 +56,24 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             Picasso.get().load(Constant.DOMAIN + comment.getComment()).resize(350,350).centerCrop().into(holder.imgCommentContent);
         }
         holder.txtCommentTime.setText(Helper.timeDifferent(comment.getCreatedAt()));
+        holder.txtAuthorName.setOnClickListener(v -> gotoProfile(String.valueOf(comment.getUserId())));
+    }
+
+    private void gotoProfile(String user_id) {
+        Intent intent;
+        SharedPreferences userTargetPref = context.getApplicationContext().getSharedPreferences("user_target", context.MODE_PRIVATE);
+        SharedPreferences userPref = context.getApplicationContext().getSharedPreferences("user", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userTargetPref.edit();
+        editor.putString("id", user_id);
+        editor.apply();
+        if(user_id.equals(userPref.getString("id", "1"))) {
+            HomeActivity homeActivity = (HomeActivity)context;
+            homeActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameHomeContainer, new AccountFragment()).commit();
+        } else {
+            intent = new Intent(context, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
     }
 
     @Override

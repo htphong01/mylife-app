@@ -99,6 +99,7 @@
 
                         <LinearLayout
                             android:id="@+id/post_like_btn"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -106,7 +107,6 @@
 
                             <ImageButton
                                 android:id="@+id/post_like_icon"
-                                android:layout_marginLeft="12dp"
                                 android:layout_marginRight="4dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -118,12 +118,11 @@
                                 android:layout_height="wrap_content"
                                 android:text="Yêu thích"
                                 android:textStyle="bold"/>
-
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/post_comment_btn"
-                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -1,6 +1,8 @@
 package com.htphong.mylife.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.CommentService;
 import com.htphong.mylife.API.PostService;
+import com.htphong.mylife.Activities.HomeActivity;
+import com.htphong.mylife.Activities.ImageActivity;
+import com.htphong.mylife.Activities.ProfileActivity;
 import com.htphong.mylife.Adapters.CommentAdapter;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Comment;
@@ -98,6 +103,8 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         btnLikePost.setOnClickListener(this);
         btnCommentPost.setOnClickListener(this);
+        imgPostPhoto.setOnClickListener(this);
+        txtPostAuthorName.setOnClickListener(this);
 
         getPost();
         getComments();
@@ -175,6 +182,23 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    private void gotoProfile(String user_id) {
+        Intent intent;
+        SharedPreferences userTargetPref = getContext().getSharedPreferences("user_target", getContext().MODE_PRIVATE);
+        SharedPreferences userPref = getContext().getSharedPreferences("user", getContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = userTargetPref.edit();
+        editor.putString("id", user_id);
+        editor.apply();
+        if(user_id.equals(userPref.getString("id", "1"))) {
+            HomeActivity homeActivity = (HomeActivity)getContext();
+            homeActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameHomeContainer, new AccountFragment()).commit();
+        } else {
+            intent = new Intent(getContext(), ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -185,6 +209,19 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
             case R.id.post_comment_btn: {
 
+                break;
+            }
+
+            case R.id.img_post_photo: {
+                Intent intent = new Intent(getContext(), ImageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("url", post.getPhoto());
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.txt_post_author_name: {
+                gotoProfile(String.valueOf(post.getUserId()));
                 break;
             }
         }

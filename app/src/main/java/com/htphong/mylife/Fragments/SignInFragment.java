@@ -1,6 +1,7 @@
 package com.htphong.mylife.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,16 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.htphong.mylife.Activities.AuthActivity;
+import com.htphong.mylife.Activities.ChattingSettingActivity;
 import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.R;
 import com.htphong.mylife.API.Client;
@@ -120,12 +124,13 @@ public class SignInFragment extends Fragment {
         dialog.show();
 
         userPref = getActivity().getApplicationContext().getSharedPreferences("user", getContext().MODE_PRIVATE);
-        Retrofit retrofit = new Client().getRetrofit(getActivity().getApplicationContext());;
+        Retrofit retrofit = new Client().getRetrofit(getActivity().getApplicationContext());
         UserService userService = retrofit.create(UserService.class);
         Call<ProfilePOJO> call = userService.login(txtEmail.getText().toString(), txtPassword.getText().toString());
         call.enqueue(new Callback<ProfilePOJO>() {
             @Override
             public void onResponse(Call<ProfilePOJO> call, Response<ProfilePOJO> response) {
+                dialog.dismiss();
                 if (response.isSuccessful() && response.body().getSuccess()) {
                     User user = response.body().getUser().get(0);
                     SharedPreferences.Editor editor = userPref.edit();
@@ -151,8 +156,9 @@ public class SignInFragment extends Fragment {
                     startActivity(new Intent(((AuthActivity)getContext()), HomeActivity.class));
                     ((AuthActivity) getContext()).finish();
                     Toast.makeText(getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                } else if(!response.body().getSuccess()) {
+                    openDialogResponse(response.body().getMessage());
                 }
-                dialog.dismiss();
 
             }
 
@@ -178,6 +184,21 @@ public class SignInFragment extends Fragment {
         }
 
         return true;
+    }
+
+    private void openDialogResponse(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Thông báo");
+        builder.setMessage(message);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                builder.setCancelable(true);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

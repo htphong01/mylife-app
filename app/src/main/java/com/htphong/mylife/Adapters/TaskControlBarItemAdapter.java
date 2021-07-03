@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htphong.mylife.Activities.TaskControlDetailsActivity;
-import com.htphong.mylife.Activities.TaskDetailsActivity;
 import com.htphong.mylife.Models.Task;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
@@ -25,12 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class TaskControlBarItem extends RecyclerView.Adapter<TaskControlBarItem.ViewHolder> {
+public class TaskControlBarItemAdapter extends RecyclerView.Adapter<TaskControlBarItemAdapter.ViewHolder> {
 
     private ArrayList<Task> taskArrayList = new ArrayList<>();
     private Context context;
 
-    public TaskControlBarItem(ArrayList<Task> taskArrayList, Context context) {
+    public TaskControlBarItemAdapter(ArrayList<Task> taskArrayList, Context context) {
         this.taskArrayList = taskArrayList;
         this.context = context;
     }

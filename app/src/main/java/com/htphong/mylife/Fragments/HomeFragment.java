@@ -1,6 +1,8 @@
 package com.htphong.mylife.Fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +20,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.PostService;
+import com.htphong.mylife.API.UserService;
+import com.htphong.mylife.Activities.AuthActivity;
 import com.htphong.mylife.Adapters.PostsAdapter;
 import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.Models.Post;
 import com.htphong.mylife.POJO.PostPOJO;
+import com.htphong.mylife.POJO.StatusPOJO;
 import com.htphong.mylife.R;
 import com.google.android.material.appbar.MaterialToolbar;
 
@@ -100,6 +106,9 @@ public class HomeFragment extends Fragment {
                 }
                 swipeRefreshLayout.setRefreshing(false);
                 postsAdapter.notifyDataSetChanged();
+                if(response.code() != 200) {
+                    openDialogResponse();
+                }
             }
 
             @Override
@@ -108,6 +117,31 @@ public class HomeFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
 
+    private void openDialogResponse() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void logout() {
+        SharedPreferences userSharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userSharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        SharedPreferences userTarget = getActivity().getApplicationContext().getSharedPreferences("user_target", getContext().MODE_PRIVATE);
+        editor = userTarget.edit();
+        editor.clear();
+        editor.apply();
+        startActivity(new Intent(((HomeActivity)getContext()), AuthActivity.class));
+        ((HomeActivity)getContext()).finish();
     }
 }

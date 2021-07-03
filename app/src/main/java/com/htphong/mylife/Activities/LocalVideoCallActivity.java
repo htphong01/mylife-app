@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,8 @@ public class LocalVideoCallActivity extends AppCompatActivity {
     private String from;
     private String to;
 
+    private MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,13 @@ public class LocalVideoCallActivity extends AppCompatActivity {
         init();
 
         makeCall();
+        startMusic();
+    }
+
+    private void startMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.send_call_sound);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     private void makeCall() {
@@ -71,6 +81,7 @@ public class LocalVideoCallActivity extends AppCompatActivity {
                     }
 
                     case ANSWERED: {
+                        mediaPlayer.stop();
                         vLocal.setVisibility(View.VISIBLE);
                         llInfo.setVisibility(View.GONE);
                         break;
@@ -78,6 +89,7 @@ public class LocalVideoCallActivity extends AppCompatActivity {
 
                     case BUSY:
                     case ENDED: {
+                        mediaPlayer.stop();
                         finish();
                         break;
                     }
@@ -155,7 +167,14 @@ public class LocalVideoCallActivity extends AppCompatActivity {
                     stringeeCall.hangup();
                     finish();
                 }
+                mediaPlayer.stop();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        mediaPlayer.stop();
+        super.onDestroy();
     }
 }

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -36,7 +38,7 @@ import retrofit2.Retrofit;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton btnBack, btnRemove;
+    private ImageButton btnBack, btnRemove, btnMicro;
     private EditText edtSearch;
     private TabLayout tabLayoutSearch;
     private RecyclerView recyclerSearch;
@@ -45,6 +47,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ArrayList<User> userList = new ArrayList<>();
     private ArrayList<Post> postList = new ArrayList<>();
     private String searchOption = "people";
+
+    private static final int SPEECH_REQUEST_CODE = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +60,38 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void init() {
         btnBack = findViewById(R.id.btn_search_back);
         btnRemove = findViewById(R.id.btn_search_remove);
+        btnMicro = findViewById(R.id.btn_search_micro);
         edtSearch = findViewById(R.id.edt_search);
-        edtSearch.setOnKeyListener(new View.OnKeyListener() {
+        edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER) ) {
-                    if(!edtSearch.getText().toString().isEmpty()) {
-                        if(searchOption.equals("people")) {
-                            searchUser();
-                        } else if (searchOption.equals("post")) {
-                            searchPost();
-                        }
-                    }
-                    return true;
-                }
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(edtSearch.getText().toString().isEmpty()) {
+                    btnMicro.setVisibility(View.VISIBLE);
+                    btnRemove.setVisibility(View.GONE);
+                } else {
+                    btnMicro.setVisibility(View.GONE);
+                    btnRemove.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtSearch.setOnKeyListener((v, keyCode, event) -> {
+            if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER) ) {
+                if(!edtSearch.getText().toString().isEmpty()) {
+                    search();
+                }
+                return true;
+            }
+            return false;
         });
         tabLayoutSearch = findViewById(R.id.tabLayout_search);
         tabLayoutSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -103,10 +123,19 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
         btnBack.setOnClickListener(this);
         btnRemove.setOnClickListener(this);
+        btnMicro.setOnClickListener(this);
 
         recyclerSearch = findViewById(R.id.search_recycler);
         recyclerSearch.setNestedScrollingEnabled(true);
         recyclerSearch.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
+    }
+
+    private void search() {
+        if(searchOption.equals("people")) {
+            searchUser();
+        } else if (searchOption.equals("post")) {
+            searchPost();
+        }
     }
 
     @Override
@@ -119,6 +148,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_search_remove: {
                 edtSearch.setText("");
+                break;
+            }
+
+            case R.id.btn_search_micro: {
+                displaySpeechRecognizer();
                 break;
             }
         }
@@ -173,5 +207,25 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                         Log.d("Search onFailure: ", t.getMessage());
                     }
                 });
+    }
+
+    private void displaySpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+            edtSearch.setText(spokenText);
+            search();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

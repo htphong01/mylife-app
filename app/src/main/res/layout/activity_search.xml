@@ -45,12 +45,23 @@
             android:textStyle="bold"/>
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/btn_search_remove"
             android:padding="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_close"
+            android:backgroundTint="@color/colorBlack"
+            android:layout_marginLeft="-78dp" />
+
+        <ImageButton
+            android:id="@+id/btn_search_micro"
+            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_mic_24"
             android:backgroundTint="@color/colorBlack"
             android:layout_marginLeft="-78dp" />
 

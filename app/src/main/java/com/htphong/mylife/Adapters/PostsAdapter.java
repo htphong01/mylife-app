@@ -38,7 +38,7 @@ import retrofit2.Retrofit;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsHolder> {
 
     private Context context;
-    private ArrayList<Post> list = new ArrayList<Post>();
+    private ArrayList<Post> list = new ArrayList<>();
 
     public PostsAdapter(Context context, ArrayList list) {
         this.context = context;

@@ -37,6 +37,18 @@ public class Friend {
     @Expose
     private User user2;
 
+    @SerializedName("friend_id")
+    @Expose
+    private Integer friendId;
+
+    @SerializedName("friend_name")
+    @Expose
+    private String friendName;
+
+    @SerializedName("friend_avatar")
+    @Expose
+    private String friendAvatar;
+
     public Integer getId() {
         return id;
     }
@@ -101,4 +113,27 @@ public class Friend {
         this.user2 = user2;
     }
 
+    public Integer getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Integer friendId) {
+        this.friendId = friendId;
+    }
+
+    public String getFriendName() {
+        return friendName;
+    }
+
+    public void setFriendName(String friendName) {
+        this.friendName = friendName;
+    }
+
+    public String getFriendAvatar() {
+        return friendAvatar;
+    }
+
+    public void setFriendAvatar(String friendAvatar) {
+        this.friendAvatar = friendAvatar;
+    }
 }

@@ -32,6 +32,7 @@ import com.htphong.mylife.Models.User;
 import com.htphong.mylife.POJO.StatusPOJO;
 import com.htphong.mylife.POJO.UserPOJO;
 import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -140,6 +141,7 @@ public class GivingTaskActivity extends AppCompatActivity implements View.OnClic
         for(int i = 0 ;i < receiverList.size(); i++) {
             receivers.add(receiverList.get(i).getId());
         }
+
         String title = edtName.getText().toString();
         String desc = edtDesc.getText().toString();
         String deadline = txtTaskDeadline.getText().toString();
@@ -148,7 +150,7 @@ public class GivingTaskActivity extends AppCompatActivity implements View.OnClic
             dialog.setMessage("Đang thêm công việc");
             dialog.show();
             retrofit.create(TaskService.class).
-                    createTask(receivers, roomSharedPreferences.getString("room_id", "12"), title, desc, convertToDatetime(deadline))
+                    createTask(receivers, roomSharedPreferences.getString("room_id", "12"), title, desc, Helper.convertToDatetime(deadline))
                     .enqueue(new Callback<StatusPOJO>() {
                         @Override
                         public void onResponse(Call<StatusPOJO> call, Response<StatusPOJO> response) {
@@ -185,20 +187,7 @@ public class GivingTaskActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-    public static String convertToDatetime(String time) {
-        SimpleDateFormat oldFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-        try {
-            String reformattedStr = newFormat.format(oldFormat.parse(time));
-            return reformattedStr;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return time;
-    }
 
-
-    Calendar date;
     public void showDateTimePicker() {
         AlertDialog.Builder builder = new AlertDialog.Builder(GivingTaskActivity.this);
         final View view = LayoutInflater.from(GivingTaskActivity.this).inflate(R.layout.layout_datetime_picker, null);

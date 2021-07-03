@@ -97,21 +97,6 @@ public class UserInforActivity extends AppCompatActivity implements View.OnClick
         btnContinue.setOnClickListener(this);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==GALLERY_ADD_PROFILE && resultCode==RESULT_OK){
-            Uri imgUri = data.getData();
-            imgUserInfo.setImageURI(imgUri);
-
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imgUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private boolean validate() {
         if (txtName.getText().toString().isEmpty()){
             layoutName.setErrorEnabled(true);
@@ -156,6 +141,21 @@ public class UserInforActivity extends AppCompatActivity implements View.OnClick
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==GALLERY_ADD_PROFILE && resultCode==RESULT_OK){
+            Uri imgUri = data.getData();
+            imgUserInfo.setImageURI(imgUri);
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imgUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private String bitmapToString(Bitmap bitmap) {

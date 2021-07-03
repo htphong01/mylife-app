@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
+    android:background="#FFF"
+    android:layout_marginTop="8dp">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
@@ -15,23 +16,68 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_marginBottom="6dp"
+            <LinearLayout
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tin nhắn"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textColor="@color/colorBlack"
-                />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat_label"/>
+
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tin nhắn"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorBlack"
+                    />
+
+                <ImageButton
+                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_chat_group"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:paddingRight="12dp"
+                    android:paddingLeft="50dp"
+                    android:imeOptions="actionSearch"
+                    android:hint="Tìm kiếm bạn bè hoặc nhóm"
+                    android:textSize="16dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_chat_search"/>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/colorWhite"
+                android:id="@+id/recycler_chat_room"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_chat_room"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/colorWhite" />
 
         </LinearLayout>
 

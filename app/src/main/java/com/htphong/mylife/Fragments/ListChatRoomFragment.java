@@ -22,10 +22,13 @@ import com.htphong.mylife.Models.Room;
 import com.htphong.mylife.POJO.RoomPOJO;
 import com.htphong.mylife.R;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

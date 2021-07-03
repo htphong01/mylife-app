@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,9 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
     private StringeeCall stringeeCall;
     private StringeeCall.SignalingState state;
 
+    private MediaPlayer mediaPlayer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,13 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
         initAnswer();
 
         requirePermission();
+        startMusic();
+    }
+
+    private void startMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.receive_call_sound);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     private void requirePermission() {
@@ -129,7 +140,6 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
                 Log.d("Stringee: ", "Ringing");
             }
         });
-        Log.d("StringeeAnswer", stringeeCall.getCallId());
     }
 
     private void init() {
@@ -165,6 +175,7 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
                     btnCancel.setVisibility(View.VISIBLE);
                     stringeeCall.answer();
                 }
+                mediaPlayer.stop();
                 break;
             }
 
@@ -174,6 +185,7 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
                     finish();
                     Log.d("RemoteVideoCall", "reject");
                 }
+                mediaPlayer.stop();
                 break;
             }
 
@@ -181,7 +193,6 @@ public class RemoteVideoCallActivity extends AppCompatActivity implements View.O
                 if(stringeeCall != null) {
                     stringeeCall.hangup();
                     finish();
-                    Log.d("RemoteVideoCall", "reject");
                 }
                 break;
             }

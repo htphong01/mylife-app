@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp">
+
+    <LinearLayout
+        android:id="@+id/event_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/radius_item"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="96dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:background="#C1E89F9F" />
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/avatar_user"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/avatar_example"
+                    />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="ABC"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:textColor="@color/colorBlack"
+                    android:maxWidth="80dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/name_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họp lớp sinh hoạt 19IT1"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorBlack"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+
+                <TextView
+                    android:id="@+id/time_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="7dp"
+                    android:text="16:00 - 18:00 29/05/2021"
+                    android:textColor="#C4009688"/>
+                <TextView
+                    android:id="@+id/place_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đại học CNTT và TT Việt - Hàn"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16dp"
+                    android:paddingTop="7dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+                <TextView
+                    android:id="@+id/status_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đang diễn ra"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16dp"
+                    android:paddingTop="7dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

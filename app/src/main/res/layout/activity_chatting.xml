@@ -40,8 +40,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_conversation_avatar"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/avatar_example"/>
+                android:layout_height="50dp"/>
 
             <TextView
                 android:id="@+id/txt_conversation_name"
@@ -51,7 +50,6 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Một bé cute"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="#FFF"/>

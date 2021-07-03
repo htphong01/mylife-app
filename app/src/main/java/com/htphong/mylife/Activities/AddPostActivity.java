@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -23,9 +24,11 @@ import android.widget.Toast;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.PostService;
 import com.htphong.mylife.R;
+import com.htphong.mylife.Utils.Helper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -36,11 +39,12 @@ import retrofit2.Retrofit;
 
 public class AddPostActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton btnAddPostImg;
+    private ImageButton btnAddPostImg, btnMicro;
     private ImageView newPostPhoto;
     private TextView btnAddNewPost;
     private EditText edtNewPost;
     private static final int GALLERY_ADD_POST = 2;
+    private static final int SPEECH_REQUEST_CODE = 8;
     private Bitmap bitmap = null;
     private ProgressDialog progressDialog;
     private SharedPreferences sharedPreferences;
@@ -60,12 +64,14 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         btnAddPostImg = findViewById(R.id.btn_addPostImg);
         newPostPhoto = findViewById(R.id.newPostPhoto);
         btnAddNewPost= findViewById(R.id.btn_addNewPost);
+        btnMicro = findViewById(R.id.btn_add_post_micro);
         edtNewPost = findViewById(R.id.newPostText);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
 
         btnAddPostImg.setOnClickListener(this);
         btnAddNewPost.setOnClickListener(this);
+        btnMicro.setOnClickListener(this);
     }
 
     public void cancelPost(View view) {
@@ -90,23 +96,25 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             }
+
+            case R.id.btn_add_post_micro: {
+                displaySpeechRecognizer();
+                break;
+            }
         }
     }
 
-    private String bitmapToString(Bitmap bitmap) {
-        if (bitmap!=null){
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
-            byte [] array = byteArrayOutputStream.toByteArray();
-            return Base64.encodeToString(array,Base64.NO_WRAP);
-        }
-        return "";
+    private void displaySpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 
     private void post() {
         progressDialog.setMessage("Đang đăng tải bài viết");
         progressDialog.show();
-        String encodedImage = bitmapToString(bitmap);
+        String encodedImage = Helper.bitmapToString(bitmap);
         Log.d("encodedImage", encodedImage);
 
         Retrofit retrofit = new Client().getRetrofit(getApplicationContext());;
@@ -138,6 +146,13 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+            edtNewPost.setText(edtNewPost.getText().toString() + spokenText);
         }
     }
 }

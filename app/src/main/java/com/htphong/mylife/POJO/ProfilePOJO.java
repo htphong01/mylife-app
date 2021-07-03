@@ -35,9 +35,21 @@ public class ProfilePOJO {
     @Expose
     private Boolean requestSendByYou;
 
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     @SerializedName("user")
     @Expose
     private List<User> user = null;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public Boolean getSuccess() {
         return success;

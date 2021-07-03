@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.socket.engineio.client.transports.WebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,11 +86,11 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
     public static Map<String, StringeeCall> callsMap = new HashMap<>();
 
     private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("http://192.168.1.180:3000/");
-        } catch (URISyntaxException e) {}
-    }
+//    {
+//        try {
+//            mSocket = IO.socket("http://192.168.152.52:3000");
+//        } catch (URISyntaxException e) {}
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,16 +98,28 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_chatting);
         userSharedPreferences = getApplicationContext().getSharedPreferences("user", getApplicationContext().MODE_PRIVATE);
         chatRoomSharedPreferences = getApplicationContext().getSharedPreferences("chat_room", getApplicationContext().MODE_PRIVATE);
-        mSocket.connect();
-
+        try {
+            IO.Options opts = new IO.Options();
+            opts.transports = new String[] { WebSocket.NAME };
+            mSocket = IO.socket("https://mylife-node.herokuapp.com/", opts);
+            mSocket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         socketOnEvents();
-        mSocket.emit("newConnector", chatRoomSharedPreferences.getString("room_id", "12"));
 
         init();
 
         initStringee();
 
         requirePermission();
+
+        mSocket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.d("SOCKET_ERROR", "chatapp call: " + args.toString());
+            }
+        });
     }
 
     private void initStringee() {
@@ -162,7 +175,6 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
 
         stringeeClient.connect(userSharedPreferences.getString("stringeeToken", stringeeToken));
     }
-
 
     private void requirePermission() {
         ActivityCompat.requestPermissions(ChattingActivity.this, new String[]{
@@ -246,6 +258,7 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void socketOnEvents() {
+        mSocket.emit("newConnector", chatRoomSharedPreferences.getString("room_id", "12"));
         mSocket.on("receiveMessage", onNewMessage);
     }
 
@@ -436,18 +449,6 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-//    private Emitter.Listener onNewVideoCall = new Emitter.Listener() {
-//        @Override
-//        public void call(final Object... args) {
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    startActivity(new Intent(ChattingActivity.this, ReceiveVideoCallActivity.class));
-//                }
-//            });
-//        }
-//    };
-
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -471,6 +472,7 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
                         if(String.valueOf(message.getRoomId()).equals(chatRoomSharedPreferences.getString("room_id", "12"))) {
                             if(!String.valueOf(message.getUserId()).equals(userSharedPreferences.getString("id", "1"))) {
                                 int size = messageArrayList.size();
+                                Log.d("RECEIVE_MESSAGE: ", message.toString());
                                 messageArrayList.add(size,message);
                                 messageAdapter.notifyItemInserted(size);
                                 recyclerChatting.smoothScrollToPosition(messageArrayList.size() - 1);
@@ -483,12 +485,6 @@ public class ChattingActivity extends AppCompatActivity implements View.OnClickL
             });
         }
     };
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mSocket.connect();
-    }
 
     @Override
     protected void onDestroy() {

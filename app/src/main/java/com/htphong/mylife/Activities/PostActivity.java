@@ -50,6 +50,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btnBack, postLikeIcon, btnImage, btnSticker, btnSend;
     private TextView txtPostTitle;
     private static int post_id = 1;
+    private static int parent_id = 0;
     private FragmentManager fragmentManager;
     private static final int GALLERY_ADD_PHOTO_COMMENT = 2;
     private PostFragment postFragment;
@@ -118,7 +119,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             case R.id.comment_send_btn: {
-                sendComment(edtComment.getText().toString(), "text");
+                sendComment(edtComment.getText().toString(), "text", parent_id);
                 break;
             }
 
@@ -129,10 +130,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void sendComment(String comment, String type) {
+    private void sendComment(String comment, String type, int parent_id) {
 //        if(type.equals("image") || (!edtComment.getText().toString().isEmpty())) {
             CommentService commentService = retrofit.create(CommentService.class);
-            Call<StatusPOJO> call = commentService.sendComment(String.valueOf(post_id), comment, type);
+            Call<StatusPOJO> call = commentService.sendComment(String.valueOf(post_id), comment, type, parent_id);
             edtComment.setText("");
             call.enqueue(new Callback<StatusPOJO>() {
                 @Override
@@ -164,7 +165,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             Uri imgUri = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imgUri);
-                sendComment(Helper.bitmapToString(bitmap), "image");
+                sendComment(Helper.bitmapToString(bitmap), "image", parent_id);
             } catch (IOException e) {
                 e.printStackTrace();
             }

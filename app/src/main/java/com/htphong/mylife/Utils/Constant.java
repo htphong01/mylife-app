@@ -24,9 +24,12 @@ import retrofit2.Retrofit;
 
 public class Constant {
     //    public static final String URL = "https://hp-blog.herokuapp.com";
-    public static final String URL = "http://192.168.1.180/blog/public";
-    public static final String DOMAIN = "http://192.168.1.180/blog/public/";
-    public static final String HOME = URL + "/api";
+    public static final String URL = "http://192.168.152.52/blog/public";
+    // home
+     public static final String DOMAIN = "http://192.168.152.52/blog/public/";
+//    public static final String DOMAIN = "http://192.168.1.8/blog/public/";
+
+//    public static final String HOME = URL + "/api";
 
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";

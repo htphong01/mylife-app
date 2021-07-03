@@ -19,9 +19,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.TaskService;
-import com.htphong.mylife.Adapters.TaskControlBarItem;
-import com.htphong.mylife.Adapters.TaskControlItem;
-import com.htphong.mylife.Adapters.TaskItemAdapter;
+import com.htphong.mylife.Adapters.TaskControlBarItemAdapter;
+import com.htphong.mylife.Adapters.TaskControlItemAdapter;
 import com.htphong.mylife.Models.Task;
 import com.htphong.mylife.POJO.TaskPOJO;
 import com.htphong.mylife.R;
@@ -86,7 +85,7 @@ public class TaskManagementControlFragment extends Fragment implements View.OnCl
         todayTaskRecyclerView.setItemViewCacheSize(10);
         todayTaskRecyclerView.setDrawingCacheEnabled(true);
         todayTaskRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        todayTaskAdapter = new TaskControlBarItem(todayTaskList, getContext());
+        todayTaskAdapter = new TaskControlBarItemAdapter(todayTaskList, getContext());
         todayTaskRecyclerView.setAdapter(todayTaskAdapter);
     }
 
@@ -97,7 +96,7 @@ public class TaskManagementControlFragment extends Fragment implements View.OnCl
         recentTaskRecyclerView.setItemViewCacheSize(10);
         recentTaskRecyclerView.setDrawingCacheEnabled(true);
         recentTaskRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        recentTaskAdapter = new TaskControlItem(recentTaskList, getContext());
+        recentTaskAdapter = new TaskControlItemAdapter(recentTaskList, getContext());
         recentTaskRecyclerView.setAdapter(recentTaskAdapter);
     }
 

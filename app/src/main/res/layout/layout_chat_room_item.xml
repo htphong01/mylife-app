@@ -21,8 +21,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginRight="10dp"
             android:id="@+id/img_chat_room_photo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@color/colorBlack"/>
 
         <LinearLayout
@@ -39,6 +39,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="16dp"
+                android:textStyle="bold"
                 android:textColor="@color/colorBlack"
                 android:text="NCKH - Rạp Xiếc Đa Kấp "/>
 
@@ -48,6 +49,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/txt_chat_room_message"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
@@ -57,17 +59,19 @@
                     android:textSize="16dp"
                     android:text="Quang Chung đã gửi một hình ảnh "/>
 
-                <TextView
-                    android:layout_marginLeft="12dp"
-                    android:id="@+id/txt_chat_room_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:maxLines="1"
-                    android:textSize="16dp"
-                    android:text="2 phút trước"/>
-
             </LinearLayout>
+
         </LinearLayout>
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:id="@+id/txt_chat_room_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:textSize="16dp"
+            android:text="2 phút trước"/>
 
     </LinearLayout>
 

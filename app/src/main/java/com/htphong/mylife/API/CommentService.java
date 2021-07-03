@@ -21,5 +21,5 @@ public interface CommentService {
     @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("api/comments")
-    Call<StatusPOJO> sendComment(@Field("post_id") String post_id, @Field("comment") String comment, @Field("type") String type);
+    Call<StatusPOJO> sendComment(@Field("post_id") String post_id, @Field("comment") String comment, @Field("type") String type, @Field("parent_id") Integer parent_id);
 }

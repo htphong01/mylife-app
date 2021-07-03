@@ -26,6 +26,9 @@ public class Notifications implements Comparable{
     @SerializedName("type")
     private Integer type;
 
+    @SerializedName("isSeen")
+    private Integer isSeen;
+
     @SerializedName("created_at")
     private String createdAt;
 
@@ -86,6 +89,14 @@ public class Notifications implements Comparable{
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getIsSeen() {
+        return isSeen;
+    }
+
+    public void setIsSeen(Integer isSeen) {
+        this.isSeen = isSeen;
     }
 
     public String getCreatedAt() {

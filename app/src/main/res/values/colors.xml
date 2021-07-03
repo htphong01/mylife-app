@@ -10,6 +10,7 @@
     <color name="colorGray">#666666</color>
     <color name="colorLightGray">#999999</color>
     <color name="colorRed">#f44336</color>
+    <color name="colorEventBackground">#FF5B5B</color>
 
 
 </resources>

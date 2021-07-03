@@ -48,8 +48,10 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.ViewHo
         SharedPreferences useSharedPreferences = context.getSharedPreferences("user", context.MODE_PRIVATE);
         Task task = (Task) taskArrayList.get(position);
         if(task.getIsCompleted() == 1) {
+            holder.checkedBtn.setVisibility(View.GONE);
             holder.unCheckBtn.setVisibility(View.VISIBLE);
         } else {
+            holder.unCheckBtn.setVisibility(View.GONE);
             holder.checkedBtn.setVisibility(View.VISIBLE);
         }
         holder.txtTaskTitle.setText(task.getTitle());

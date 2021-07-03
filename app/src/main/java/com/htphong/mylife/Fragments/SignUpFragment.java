@@ -1,6 +1,7 @@
 package com.htphong.mylife.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.htphong.mylife.API.Client;
@@ -168,7 +170,10 @@ public class SignUpFragment extends Fragment {
                     startActivity(new Intent(((AuthActivity)getContext()), UserInforActivity.class));
                     ((AuthActivity) getContext()).finish();
                     Toast.makeText(getContext(), "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                } else if(!response.body().getSuccess()) {
+                    openDialogResponse("Email đã có người sử dụng");
                 }
+
                 dialog.dismiss();
 
             }
@@ -198,7 +203,21 @@ public class SignUpFragment extends Fragment {
             layoutConfirm.setError("Mật khẩu không trùng khớp");
             return false;
         }
-
         return true;
+    }
+
+    private void openDialogResponse(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Thông báo");
+        builder.setMessage(message);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                builder.setCancelable(true);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

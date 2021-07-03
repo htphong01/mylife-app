@@ -2,7 +2,6 @@ package com.htphong.mylife.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htphong.mylife.Activities.TaskControlDetailsActivity;
-import com.htphong.mylife.Activities.TaskDetailsActivity;
 import com.htphong.mylife.Models.Task;
 import com.htphong.mylife.R;
 import com.htphong.mylife.Utils.Helper;
 
 import java.util.ArrayList;
 
-public class TaskControlItem extends RecyclerView.Adapter<TaskControlItem.ViewHolder> {
+public class TaskControlItemAdapter extends RecyclerView.Adapter<TaskControlItemAdapter.ViewHolder> {
 
     private ArrayList<Task> taskArrayList = new ArrayList<>();
     private Context context;
 
-    public TaskControlItem(ArrayList<Task> taskArrayList, Context context) {
+    public TaskControlItemAdapter(ArrayList<Task> taskArrayList, Context context) {
         this.taskArrayList = taskArrayList;
         this.context = context;
     }

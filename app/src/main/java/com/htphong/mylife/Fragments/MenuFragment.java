@@ -19,6 +19,10 @@ import androidx.fragment.app.FragmentManager;
 import com.htphong.mylife.API.Client;
 import com.htphong.mylife.API.UserService;
 import com.htphong.mylife.Activities.AuthActivity;
+import com.htphong.mylife.Activities.EventActivity;
+import com.htphong.mylife.Activities.FriendListActivity;
+import com.htphong.mylife.Activities.MyQRActivity;
+import com.htphong.mylife.Activities.ScanQRActivity;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Activities.HomeActivity;
 import com.htphong.mylife.POJO.StatusPOJO;
@@ -59,7 +63,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         menuFriend = view.findViewById(R.id.menu_friend);
         menuEvent = view.findViewById(R.id.menu_event);
         menuAlbum = view.findViewById(R.id.menu_album);
-        menuNotification = view.findViewById(R.id.menu_notification);
+        menuNotification = view.findViewById(R.id.menu_qr);
         menuSetting = view.findViewById(R.id.menu_setting);
         menuHelp = view.findViewById(R.id.menu_help);
         menuLogout = view.findViewById(R.id.menu_logout);
@@ -85,6 +89,21 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.menu_logout: {
                 logout();
+                break;
+            }
+
+            case R.id.menu_event: {
+                startActivity(new Intent(getContext(), EventActivity.class));
+                break;
+            }
+
+            case R.id.menu_friend: {
+                startActivity(new Intent(getContext(), FriendListActivity.class));
+                break;
+            }
+
+            case R.id.menu_qr: {
+                startActivity(new Intent(getContext(), MyQRActivity.class));
                 break;
             }
         }

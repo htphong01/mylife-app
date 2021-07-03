@@ -1,6 +1,7 @@
 package com.htphong.mylife.Utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
@@ -111,9 +112,21 @@ public class Helper {
             byte [] array = byteArrayOutputStream.toByteArray();
             return Base64.encodeToString(array,Base64.NO_WRAP);
         }
-
         return "";
     }
+
+    public static Bitmap stringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
 
     public static String convertDateTime(String time) {
         SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
@@ -141,5 +154,16 @@ public class Helper {
         return time;
     }
 
+    public static String convertToDatetime(String time) {
+        SimpleDateFormat oldFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            String reformattedStr = newFormat.format(oldFormat.parse(time));
+            return reformattedStr;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
 
 }

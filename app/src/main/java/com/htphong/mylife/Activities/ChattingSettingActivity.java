@@ -20,8 +20,7 @@ import android.widget.TextView;
 
 import com.htphong.mylife.API.ChattingService;
 import com.htphong.mylife.API.Client;
-import com.htphong.mylife.Adapters.ImageAdapter;
-import com.htphong.mylife.Fragments.AccountFragment;
+import com.htphong.mylife.Adapters.ChatImageAdapter;
 import com.htphong.mylife.Models.Room;
 import com.htphong.mylife.POJO.RoomPOJO;
 import com.htphong.mylife.POJO.StatusPOJO;
@@ -66,7 +65,7 @@ public class ChattingSettingActivity extends AppCompatActivity implements View.O
         recyclerView = findViewById(R.id.chat_setting_recycler_image);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
         recyclerView.setItemViewCacheSize(10);
-        adapter = new ImageAdapter(listImages);
+        adapter = new ChatImageAdapter(listImages, getApplicationContext());
         recyclerView.setAdapter(adapter);
 
         chatAvatar = findViewById(R.id.chat_setting_avatar);

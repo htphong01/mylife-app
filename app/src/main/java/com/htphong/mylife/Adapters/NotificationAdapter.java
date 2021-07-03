@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.htphong.mylife.API.Client;
+import com.htphong.mylife.API.NotificationService;
 import com.htphong.mylife.Activities.PostActivity;
 import com.htphong.mylife.Activities.ProfileActivity;
 import com.htphong.mylife.Models.Post;
+import com.htphong.mylife.POJO.StatusPOJO;
 import com.htphong.mylife.Utils.Constant;
 import com.htphong.mylife.Models.Notifications;
 import com.htphong.mylife.R;
@@ -30,6 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     public ArrayList<Notifications> list = new ArrayList<Notifications>();
@@ -63,9 +70,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.layoutNotification.setOnClickListener(v -> {
             notificationClicked(notification);
         });
+
+        if(notification.getIsSeen() == 2) {
+            holder.layoutNotification.setBackgroundResource(R.drawable.bg_notification_seen);
+        }
     }
 
     private void notificationClicked(Notifications notification) {
+        seenNotification(String.valueOf(notification.getId()));
         switch (notification.getType()) {
             case 1:
             case 4: {
@@ -79,6 +91,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
 
         }
+    }
+
+    private void seenNotification(String id) {
+        Retrofit retrofit = new Client().getRetrofit(context);
+        retrofit.create(NotificationService.class).seenNotification(id)
+                .enqueue(new Callback<StatusPOJO>() {
+                    @Override
+                    public void onResponse(Call<StatusPOJO> call, Response<StatusPOJO> response) {
+                        Log.d("SEEN_NOTIFICATION_RES: ", response.message());
+                    }
+
+                    @Override
+                    public void onFailure(Call<StatusPOJO> call, Throwable t) {
+                        Log.d("SEEN_NOTIFICATION_ERR: ", t.getMessage());
+                    }
+                });
     }
 
     private void goToPost(String post_id) {

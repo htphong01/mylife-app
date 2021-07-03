@@ -33,7 +33,7 @@ public class AccountAlbumFragment extends Fragment {
 
     private View view;
     private Context context;
-    private ArrayList<String> imageLinks = new ArrayList<>();
+    private ArrayList<Post> imageLinks = new ArrayList<>();
     private RecyclerView recyclerAccountPost;
     private RecyclerView.Adapter postAdapter;
     private SharedPreferences sharedPreferences;
@@ -53,7 +53,7 @@ public class AccountAlbumFragment extends Fragment {
 //        recyclerAccountPost.setHasFixedSize(true);
         recyclerAccountPost.setNestedScrollingEnabled(true);
         recyclerAccountPost.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        postAdapter = new ImageAdapter(imageLinks);
+        postAdapter = new ImageAdapter(imageLinks, getContext());
         recyclerAccountPost.setAdapter(postAdapter);
         getPosts();
     }
@@ -69,10 +69,7 @@ public class AccountAlbumFragment extends Fragment {
             @Override
             public void onResponse(Call<PostPOJO> call, Response<PostPOJO> response) {
                 if(response.isSuccessful()) {
-                    List<Post> post = response.body().getPosts();
-                    for(int i = 0; i < post.size(); i++) {
-                        imageLinks.add(post.get(i).getPhoto());
-                    }
+                    imageLinks.addAll(response.body().getPosts());
                     postAdapter.notifyDataSetChanged();
                 }
             }
